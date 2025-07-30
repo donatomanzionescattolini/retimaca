@@ -1,7 +1,10 @@
 import { Facebook, Instagram, Twitter, Phone, Mail, MapPin } from "lucide-react";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
+  
   return (
     <footer className="text-white" style={{ backgroundColor: "hsl(var(--dark-slate))" }}>
       <div className="container mx-auto px-4 py-12">
@@ -9,8 +12,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <h5 className="text-xl font-bold mb-4">Retimaca</h5>
             <p className="mb-4 text-gray-300">
-              Miami's premier supplier of premium cooking wood for restaurants, 
-              pizzerias, and commercial kitchens throughout Miami-Dade County.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-gray-300">
@@ -26,26 +28,26 @@ export function Footer() {
           </div>
           
           <div>
-            <h6 className="font-semibold mb-4">Quick Links</h6>
+            <h6 className="font-semibold mb-4">{t('footer.quickLinks')}</h6>
             <ul className="space-y-2">
               <li>
-                <Link href="/">
-                  <a className="text-gray-300 hover:text-white">Home</a>
+                <Link href="/" className="text-gray-300 hover:text-white">
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
-                <Link href="/products">
-                  <a className="text-gray-300 hover:text-white">Products</a>
+                <Link href="/products" className="text-gray-300 hover:text-white">
+                  {t('nav.products')}
                 </Link>
               </li>
               <li>
-                <Link href="/about">
-                  <a className="text-gray-300 hover:text-white">About</a>
+                <Link href="/about" className="text-gray-300 hover:text-white">
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact">
-                  <a className="text-gray-300 hover:text-white">Contact</a>
+                <Link href="/contact" className="text-gray-300 hover:text-white">
+                  {t('nav.contact')}
                 </Link>
               </li>
             </ul>

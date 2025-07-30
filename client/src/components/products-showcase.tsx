@@ -2,34 +2,37 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { TreePine } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function ProductsShowcase() {
+  const { t } = useTranslation();
+  
   const products = [
     {
-      name: "Premium Oak",
+      name: t('products.oak.name'),
       image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      description: "Perfect for steakhouses and grilling. Long burn time with excellent flavor.",
+      description: t('products.oak.description'),
       badge: "Restaurant Grade",
       badgeVariant: "default" as const
     },
     {
-      name: "Hickory",
+      name: t('products.hickory.name'),
       image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      description: "Ideal for BBQ restaurants and smokers. Strong, distinctive flavor profile.",
+      description: t('products.hickory.description'),
       badge: "Popular Choice",
       badgeVariant: "secondary" as const
     },
     {
-      name: "Cherry",
+      name: t('products.cherry.name'),
       image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      description: "Premium choice for pizza ovens. Mild, sweet flavor that enhances food.",
+      description: t('products.cherry.description'),
       badge: "Pizza Favorite",
       badgeVariant: "destructive" as const
     },
     {
-      name: "Apple Wood",
+      name: t('products.apple.name'),
       image: "https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-      description: "Subtle, fruity flavor perfect for poultry and pork dishes.",
+      description: t('products.apple.description'),
       badge: "Specialty",
       badgeVariant: "outline" as const
     }
@@ -40,10 +43,10 @@ export function ProductsShowcase() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: "hsl(var(--primary-brown))" }}>
-            Premium Restaurant Wood Products
+            {t('products.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From pizza oven perfection to steakhouse grilling, we supply the right wood for every culinary need.
+            {t('products.description')}
           </p>
         </div>
 
@@ -72,7 +75,7 @@ export function ProductsShowcase() {
           <Link href="/products">
             <Button className="btn-primary-custom text-lg">
               <TreePine className="mr-2 h-5 w-5" />
-              View All Wood Types
+              {t('products.viewAll')}
             </Button>
           </Link>
         </div>

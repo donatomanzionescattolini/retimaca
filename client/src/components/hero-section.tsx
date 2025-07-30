@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Flame, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function HeroSection() {
+  const { t } = useTranslation();
+  
   return (
     <section 
       className="hero-section flex items-center text-white"
@@ -13,25 +16,25 @@ export function HeroSection() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl">
           <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-            Retimaca Premium Restaurant Wood
+            {t('hero.title')}
           </h1>
           <p className="text-2xl lg:text-3xl font-semibold mb-6">
-            OUR QUALITY CAN'T BE BEAT!
+            {t('hero.subtitle')}
           </p>
           <p className="text-xl mb-8 max-w-2xl">
-            Miami's premier supplier of premium cooking wood for restaurants, pizzerias, and commercial kitchens.
+            {t('hero.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/products">
               <Button className="btn-primary-custom text-lg">
                 <Flame className="mr-2 h-5 w-5" />
-                View Our Wood Products
+                {t('hero.viewProducts')}
               </Button>
             </Link>
             <Link href="/contact">
               <Button className="btn-secondary-custom text-lg">
                 <Phone className="mr-2 h-5 w-5" />
-                Get Quote Now
+                {t('hero.getQuote')}
               </Button>
             </Link>
           </div>

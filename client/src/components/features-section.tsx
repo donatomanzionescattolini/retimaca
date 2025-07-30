@@ -1,24 +1,27 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Building, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function FeaturesSection() {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: Users,
-      title: "Family Business",
-      description: "We believe in family values with our dedicated team involved in daily operations, ensuring personal service for every Miami restaurant we serve.",
+      title: t('features.family.title'),
+      description: t('features.family.description'),
       color: "hsl(var(--primary-brown))"
     },
     {
       icon: Building,
-      title: "Commercial Focus",
-      description: "Specializing exclusively in commercial restaurant supply across Miami-Dade County, from fine dining establishments to casual pizzerias.",
+      title: t('features.commercial.title'),
+      description: t('features.commercial.description'),
       color: "hsl(var(--accent-green))"
     },
     {
       icon: Award,
-      title: "Premium Quality",
-      description: "Only the finest kiln-dried hardwoods that meet strict restaurant standards for flavor, burn quality, and food safety regulations.",
+      title: t('features.quality.title'),
+      description: t('features.quality.description'),
       color: "hsl(var(--secondary-chocolate))"
     }
   ];

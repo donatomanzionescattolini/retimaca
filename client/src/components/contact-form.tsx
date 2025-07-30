@@ -11,10 +11,12 @@ import { useToast } from "@/hooks/use-toast";
 import { insertContactRequestSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { Send, Phone, Mail, MapPin, Truck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { InsertContactRequest } from "@shared/schema";
 
 export function ContactForm() {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [selectedWoodType, setSelectedWoodType] = useState<string>("");
 
   const form = useForm<InsertContactRequest>({
@@ -62,10 +64,10 @@ export function ContactForm() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: "hsl(var(--primary-brown))" }}>
-            Get Your Wood Delivery Quote
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600">
-            Ready to supply your Miami restaurant with premium cooking wood?
+            {t('contact.subtitle')}
           </p>
         </div>
         
@@ -78,11 +80,11 @@ export function ContactForm() {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="restaurantName">Restaurant Name *</Label>
+                    <Label htmlFor="restaurantName">{t('contact.form.restaurantName')} *</Label>
                     <Input
                       id="restaurantName"
                       {...form.register("restaurantName")}
-                      placeholder="Your Restaurant Name"
+                      placeholder={t('contact.form.restaurantName')}
                     />
                     {form.formState.errors.restaurantName && (
                       <p className="text-red-500 text-sm mt-1">
@@ -203,7 +205,7 @@ export function ContactForm() {
                   disabled={contactMutation.isPending}
                 >
                   <Send className="mr-2 h-5 w-5" />
-                  {contactMutation.isPending ? "Sending..." : "Request Quote"}
+                  {contactMutation.isPending ? t('contact.form.sending') : t('contact.form.submit')}
                 </Button>
               </form>
             </div>

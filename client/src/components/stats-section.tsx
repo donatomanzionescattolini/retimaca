@@ -1,9 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 export function StatsSection() {
+  const { t } = useTranslation();
+  
   const stats = [
-    { number: "150+", label: "Miami Restaurants Served" },
-    { number: "500+", label: "Monthly Deliveries" },
-    { number: "15+", label: "Years Experience" },
-    { number: "100%", label: "Miami-Dade Coverage" }
+    { number: "150+", label: t('stats.restaurants') },
+    { number: "500+", label: t('stats.deliveries') },
+    { number: "15+", label: t('stats.experience') },
+    { number: "100%", label: t('stats.coverage') }
   ];
 
   return (
