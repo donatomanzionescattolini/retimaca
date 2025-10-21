@@ -488,6 +488,57 @@ body {
   font-size: 0.9rem;
 }
 
+/* Guides Section */
+.guide-card {
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ffc107, #17a2b8);
+}
+
+.guide-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+}
+
+.guide-icon-large {
+  font-size: 4rem;
+}
+
+.guide-title {
+  color: #8B4513;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.guide-description {
+  color: #6b4423;
+  line-height: 1.6;
+}
+
+.guide-content {
+  text-align: left;
+  background: #f8f9fa !important;
+  border: 1px solid #dee2e6;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* About Section Enhancements */
 .about-content {
   background: white;
