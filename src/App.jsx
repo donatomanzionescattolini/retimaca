@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import {
   MDBContainer,
   MDBNavbar,
@@ -13,19 +14,189 @@ import {
   MDBInput,
   MDBTextArea,
   MDBBtn,
+  MDBNavbarLink,
   MDBIcon,
   MDBNavbarNav,
-  MDBNavbarLink,
-  MDBNavbarToggler,
   MDBCollapse,
   MDBNavbarItem,
+  MDBNavbarToggler,
   MDBCardSubTitle,
-  MDBCarousel,
-  MDBCarouselItem,
 } from "mdb-react-ui-kit";
 
 import "./index.css";
 import "mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs";
+
+// Mobile scroll indicator component (visible on small screens)
+function ScrollIndicator({ currentSection }) {
+  const sections = [
+    'inicio',
+    'sobre-nosotros',
+    'productos',
+    'videos',
+    'galeria',
+    'opiniones',
+    'delivery',
+    'guias',
+    'contacto',
+  ];
+
+  return (
+    <div className="section-indicator d-block d-md-none" aria-hidden="false">
+      {sections.map((section) => (
+        <a
+          key={section}
+          href={`#${section}`}
+          className={`indicator-dot ${currentSection === section ? 'active' : ''}`}
+          aria-label={`Go to ${section} section`}
+        />
+      ))}
+    </div>
+  );
+}
+ScrollIndicator.propTypes = {
+  currentSection: PropTypes.string,
+};
+
+// Extracted gallery carousel into its own component to reduce App complexity
+// Helper to compute gallery item layout
+function computeGalleryLayout(index, currentSlide, galleryLength, isMobile) {
+  const position = (index - currentSlide + galleryLength) % galleryLength;
+
+  const centerScale = isMobile ? 0.9 : 1;
+  const sideScale = isMobile ? 0.6 : 0.8;
+  const smallScale = isMobile ? 0.5 : 0.7;
+
+  const layouts = {
+    0: { transform: 'translateX(0)', opacity: 1, zIndex: 3, scale: centerScale },
+    1: { transform: `translateX(${isMobile ? '60%' : '80%'})`, opacity: isMobile ? 0.4 : 0.6, zIndex: 2, scale: sideScale },
+    2: { transform: `translateX(${isMobile ? '120%' : '160%'})`, opacity: isMobile ? 0.2 : 0.3, zIndex: 1, scale: smallScale },
+    [-1 + galleryLength]: { transform: `translateX(${isMobile ? '-60%' : '-80%'})`, opacity: isMobile ? 0.4 : 0.6, zIndex: 2, scale: sideScale },
+    [-2 + galleryLength]: { transform: `translateX(${isMobile ? '-120%' : '-160%'})`, opacity: isMobile ? 0.2 : 0.3, zIndex: 1, scale: smallScale },
+  };
+
+  // Try exact position keys first
+  if (layouts[position]) return layouts[position];
+
+  // fallback for others
+  return { transform: `translateX(${isMobile ? '200%' : '220%'})`, opacity: 0, zIndex: 0, scale: isMobile ? 0.45 : 0.6 };
+}
+
+function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
+  let isMobile = false;
+  if (globalThis.window) {
+    isMobile = globalThis.window.innerWidth < 768;
+  }
+
+  return (
+    <section id="galeria" className="py-5">
+      <MDBContainer>
+        <div className="text-center mb-5">
+          <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
+            <MDBIcon fas icon="images" className="me-3 text-info" />
+            Galería de Fotos
+          </h2>
+          <div className="underline mx-auto mb-4"></div>
+          <p className="text-muted"
+             style={{
+               fontSize: "1rem",
+               maxWidth: "600px",
+               margin: "0 auto",
+               lineHeight: "1.6",
+               opacity: "0.9"
+             }}>
+            Descubre nuestra pasión por la calidad y excelencia a través de nuestra galería de imágenes
+          </p>
+        </div>
+        <div
+          className="position-relative"
+          style={{
+            height: isMobile ? "350px" : "400px",
+            overflow: "hidden",
+          }}
+        >
+          <div className="d-flex align-items-center justify-content-center h-100">
+            {gallery.map((item, index) => {
+              const { transform, opacity, zIndex, scale } = computeGalleryLayout(index, currentSlide, gallery.length, isMobile);
+
+              return (
+                <div
+                  key={item.src}
+                  className="position-absolute"
+                  style={{
+                    transform: `${transform} scale(${scale})`,
+                    opacity,
+                    zIndex,
+                    transition: "all 0.5s ease-in-out",
+                    width: isMobile ? "220px" : "280px",
+                  }}
+                >
+                  <MDBCard className="gallery-card border-0 shadow-lg">
+                    <div className="gallery-image-container">
+                      {item.type === "video" ? (
+                        <video
+                          src={item.src}
+                          className="gallery-image"
+                          controls
+                          playsInline
+                          preload="metadata"
+                          style={{ pointerEvents: 'auto', zIndex: 10 }}
+                        />
+                      ) : (
+                        <>
+                          <MDBCardImage
+                            src={item.src}
+                            alt={item.title}
+                            className="gallery-image"
+                          />
+                          <div className="gallery-overlay">
+                            <MDBIcon
+                              fas
+                              icon="search-plus"
+                              className="overlay-icon"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <MDBCardBody className="p-3">
+                      <MDBCardText
+                        className="text-center gallery-title"
+                        style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
+                      >
+                        {item.title}
+                      </MDBCardText>
+                    </MDBCardBody>
+                  </MDBCard>
+                </div>
+              );
+            })}
+          </div>
+          <button
+            type="button"
+            className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
+            onClick={prevSlide}
+            onKeyDown={(e) => e.key === 'Enter' && prevSlide()}
+            aria-label="Previous slide"
+          ></button>
+          <button
+            type="button"
+            className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right "
+            onClick={nextSlide}
+            onKeyDown={(e) => e.key === 'Enter' && nextSlide()}
+            aria-label="Next slide"
+          ></button>
+        </div>
+      </MDBContainer>
+    </section>
+  );
+}
+
+GalleryCarousel.propTypes = {
+  gallery: PropTypes.array.isRequired,
+  currentSlide: PropTypes.number.isRequired,
+  prevSlide: PropTypes.func.isRequired,
+  nextSlide: PropTypes.func.isRequired,
+};
 export default function App() {
   const [formData, setFormData] = useState({
     name: "",
@@ -50,10 +221,18 @@ export default function App() {
   ];
 
   const gallery = [
-    { src: "/pallet.jpg", title: "Pallet completo de leña seca" },
-    { src: "/bundle.jpg", title: "Paquete de 5 piezas" },
-    { src: "/casuarina.jpg", title: "Leña Casuarina lista para entrega" },
-    { src: "/oak-blanco.jpg", title: "Leña Oak Blanco premium" },
+    { src: "/pallet.jpg", title: "Pallet completo de leña seca", type: "image" },
+    { src: "/bundle.jpg", title: "Paquete de 5 piezas", type: "image" },
+    { src: "/casuarina.jpg", title: "Leña Casuarina lista para entrega", type: "image" },
+    { src: "/oak-blanco.jpg", title: "Leña Oak Blanco premium", type: "image" },
+    { src: "/video (1).mp4", title: "Servicio bajo la lluvia", type: "video" },
+    { src: "/video (2).mp4", title: "El secreto de la pizza bien hecha", type: "video" },
+    { src: "/video (3).mp4", title: "Nuestros trabajadores en accin", type: "video" },
+    { src: "/video (4).mp4", title: "Ejemplo de uso", type: "video" },
+    { src: "/video (5).mp4", title: "Tip para que el carbon dure mas", type: "video" },
+    { src: "/video (6).mp4", title: "Tip para encender", type: "video" },
+    { src: "/video (7).mp4", title: "Ejemplo de uso", type: "video" },
+  
   ];
 
   const reviews = [
@@ -111,7 +290,7 @@ export default function App() {
   const renderStars = (count) =>
     Array.from({ length: 5 }, (_, i) => (
       <MDBIcon
-        key={i}
+        key={`star-${i}`}
         fas
         icon="star"
         className={i < count ? "text-warning" : "text-muted"}
@@ -119,6 +298,32 @@ export default function App() {
     ));
   const [openNavNoTogglerThird, setOpenNavNoTogglerThird] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSection, setCurrentSection] = useState("");
+
+  // Function to update current section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['inicio', 'sobre-nosotros', 'productos', 'galeria', 'opiniones', 'delivery', 'guias', 'contacto'];
+      let current = '';
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100) { // Adjusted for sticky header
+            current = section;
+          }
+        }
+      }
+      
+      setCurrentSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -128,13 +333,26 @@ export default function App() {
     setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
   };
 
+  // (ScrollIndicator is defined at top-level)
+
   return (
     <div className="app-container">
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/17868507247?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20de%20le%C3%B1a"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="whatsapp-float"
+        aria-label="Contactar por WhatsApp"
+      >
+        <MDBIcon fab icon="whatsapp" className="whatsapp-icon" />
+      </a>
+      <ScrollIndicator currentSection={currentSection} />
       <MDBNavbar
         expand="lg"
         light
         bgColor="dark"
-        style={{ color: "rgb(244, 228, 193)" }}
+        style={{ color: "rgb(244, 228, 193)", position: "sticky", top: 0, zIndex: 1000 }}
       >
         <MDBContainer fluid>
           {" "}
@@ -149,7 +367,7 @@ export default function App() {
               className="me-2 img-fluid"
               style={{ width: "40px", height: "40px" }}
             />
-            Retimaca
+            <span className="brand-text">Retimaca</span>
           </MDBNavbarBrand>
           <MDBNavbarToggler
             type="button"
@@ -167,7 +385,7 @@ export default function App() {
               <MDBNavbarItem>
                 <MDBNavbarLink
                   href="#sobre-nosotros"
-                  className="nav-link-custom mx-2"
+                  className={`nav-link-custom mx-2 ${currentSection === 'sobre-nosotros' ? 'active' : ''}`}
                 >
                   Sobre Nosotros
                 </MDBNavbarLink>
@@ -206,7 +424,8 @@ export default function App() {
         </MDBContainer>
       </MDBNavbar>
       {/* Hero */}
-      <section className="hero-section">
+      <section id="inicio" className="hero-section position-relative">
+        {/* Hero background video removed per request (was covering hero text) */}
         <div className="hero-overlay">
           <MDBContainer className="text-center py-5">
             <div className="hero-content">
@@ -323,6 +542,55 @@ export default function App() {
           </MDBRow>
         </MDBContainer>
       </section>
+
+      {/* Additional videos from public folder */}
+      {/* <section aria-hidden="true">
+        <MDBContainer>
+          <MDBRow className="g-4 justify-content-center mt-4">
+            <MDBCol lg="6" md="12">
+              <div className="video-card h-100 position-relative rounded-4 overflow-hidden shadow-lg">
+                <div className="ratio ratio-16x9">
+                  <video src="/video (5).mp4" className="rounded-4" controls playsInline preload="metadata">
+                    <track kind="captions" src="/captions/video5.vtt" srcLang="es" label="Spanish" />
+                  </video>
+                </div>
+             
+              </div>
+            </MDBCol>
+
+            <MDBCol lg="6" md="12">
+              <div className="video-card h-100 position-relative rounded-4 overflow-hidden shadow-lg">
+                <div className="ratio ratio-16x9">
+                  <video src="/video (6).mp4" className="rounded-4" controls playsInline preload="metadata">
+                    <track kind="captions" src="/captions/video6.vtt" srcLang="es" label="Spanish" />
+                  </video>
+                </div>
+              </div>
+            </MDBCol>
+          </MDBRow>
+
+          <MDBRow className="g-4 justify-content-center mt-4">
+            <MDBCol lg="6" md="12">
+              <div className="video-card h-100 position-relative rounded-4 overflow-hidden shadow-lg">
+                <div className="ratio ratio-16x9">
+                  <video src="/video (7).mp4" className="rounded-4" controls playsInline preload="metadata">
+                    <track kind="captions" src="/captions/video7.vtt" srcLang="es" label="Spanish" />
+                  </video>
+                </div>
+              </div>
+            </MDBCol>
+
+            <MDBCol lg="6" md="12">
+              <div className="video-card h-100 position-relative rounded-4 overflow-hidden shadow-lg">
+                <div className="ratio ratio-16x9">
+                  <video src="/video (8).mp4" className="rounded-4" controls playsInline preload="metadata">
+                    <track kind="captions" src="/captions/video8.vtt" srcLang="es" label="Spanish" />
+                  </video>
+                </div>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+      </section> */}
 
       {/* Products */}
       <section className="py-5" id="productos">
@@ -448,127 +716,14 @@ export default function App() {
         </MDBContainer>
       </section>
 
+      {/* Videos */}
+
       {/* Gallery */}
-      <section className="py-5">
-        <MDBContainer>
-          <div className="text-center mb-5">
-            <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
-              <MDBIcon fas icon="images" className="me-3 text-info" />
-              Galería de Fotos
-            </h2>
-            <small>
-              <p className="lead text-muted">
-                Conoce la calidad de nuestros productos, la excelencia de
-                nuestros trabajadores y la dicha de nuestra trayectoria con
-                estas imágenes
-              </p>
-            </small>
-          </div>
-          <div
-            className="position-relative"
-            style={{
-              height: window.innerWidth < 768 ? "350px" : "400px",
-              overflow: "hidden",
-            }}
-          >
-            <div className="d-flex align-items-center justify-content-center h-100">
-              {gallery.map((item, index) => {
-                const position =
-                  (index - currentSlide + gallery.length) % gallery.length;
-                let transform = "";
-                let opacity = 0;
-                let zIndex = 0;
-                let scale = 0.7;
-                const isMobile = window.innerWidth < 768;
-
-                if (position === 0) {
-                  transform = "translateX(0)";
-                  opacity = 1;
-                  zIndex = 3;
-                  scale = isMobile ? 0.9 : 1;
-                } else if (position === 1 || position === gallery.length - 1) {
-                  transform =
-                    position === 1
-                      ? `translateX(${isMobile ? "60%" : "80%"})`
-                      : `translateX(${isMobile ? "-60%" : "-80%"})`;
-                  opacity = isMobile ? 0.4 : 0.6;
-                  zIndex = 2;
-                  scale = isMobile ? 0.6 : 0.8;
-                } else if (position === 2 || position === gallery.length - 2) {
-                  transform =
-                    position === 2
-                      ? `translateX(${isMobile ? "120%" : "160%"})`
-                      : `translateX(${isMobile ? "-120%" : "-160%"})`;
-                  opacity = isMobile ? 0.2 : 0.3;
-                  zIndex = 1;
-                  scale = isMobile ? 0.5 : 0.7;
-                }
-
-                return (
-                  <div
-                    key={index}
-                    className="position-absolute"
-                    style={{
-                      transform: `${transform} scale(${scale})`,
-                      opacity,
-                      zIndex,
-                      transition: "all 0.5s ease-in-out",
-                      width: isMobile ? "220px" : "280px",
-                    }}
-                  >
-                    <MDBCard className="gallery-card border-0 shadow-lg">
-                      <div className="gallery-image-container">
-                        <MDBCardImage
-                          src={item.src}
-                          alt={item.title}
-                          className="gallery-image"
-                        />
-                        <div className="gallery-overlay">
-                          <MDBIcon
-                            fas
-                            icon="search-plus"
-                            className="overlay-icon"
-                          />
-                        </div>
-                      </div>
-                      <MDBCardBody className="p-3">
-                        <MDBCardText
-                          className="text-center gallery-title"
-                          style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
-                        >
-                          {item.title}
-                        </MDBCardText>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </div>
-                );
-              })}
-            </div>
-            <button
-              type="button"
-              className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
-              onClick={prevSlide}
-              onKeyDown={(e) => e.key === 'Enter' && prevSlide()}
-              aria-label="Previous slide"
-            >
-      
-            </button>
-            <button
-              type="button"
-              className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right "
-              onClick={nextSlide}
-            
-              onKeyDown={(e) => e.key === 'Enter' && nextSlide()}
-              aria-label="Next slide"
-            >
-           
-            </button>
-          </div>
-        </MDBContainer>
-      </section>
+      <GalleryCarousel gallery={gallery} currentSlide={currentSlide} prevSlide={prevSlide} nextSlide={nextSlide} />
 
       {/* Reviews */}
       <section
+        id="opiniones"
         className="py-5"
         style={{
           background: "linear-gradient(135deg, #2c1810 0%, #4a2c0a 100%)",
@@ -586,8 +741,8 @@ export default function App() {
             </p>
           </div>
           <MDBRow className="g-4 justify-content-center">
-            {reviews.map((rev, i) => (
-              <MDBCol lg="4" md="6" key={i}>
+            {reviews.map((rev) => (
+              <MDBCol lg="4" md="6" key={rev.name}>
                 <MDBCard className="review-card h-100 border-0 shadow-lg">
                   <MDBCardBody className="text-center p-4">
                     <div className="review-avatar mb-3">
@@ -686,7 +841,7 @@ export default function App() {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
-      </section>
+      </section> 
 
       {/* Guides Section */}
       <section
@@ -744,8 +899,8 @@ export default function App() {
                   <div className="guide-icon mb-3">
                     <MDBIcon
                       fas
-                      icon="map-marked-alt"
-                      className="guide-icon-large text-info"
+                      icon="tree"
+                      className="guide-icon-large text-success"
                     />
                   </div>
                   <MDBCardTitle className="guide-title mb-3">
@@ -925,7 +1080,7 @@ export default function App() {
               <div className="footer-info">
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="map-marker-alt" className="me-2" />
-                  9230 SW 71st St, Miami, FL 33173
+                  8781 SW 72nd St, Miami, FL 33173
                 </div>
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="clock" className="me-2" />

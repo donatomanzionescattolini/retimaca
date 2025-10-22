@@ -1,42 +1,158 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Base styles */
+:root {
+  --section-spacing-mobile: 3rem;
+  --card-spacing-mobile: 1.5rem;
+  --primary-color: #8B4513;
+  --accent-color: #f4e4c1;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Mobile-first card layouts */
+.product-card,
+.presentation-card,
+.guide-card,
+.review-card {
+  margin-bottom: var(--card-spacing-mobile);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Active navigation styles */
+.nav-link-custom.active {
+  color: var(--accent-color) !important;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-link-custom.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  section {
+    padding-top: var(--section-spacing-mobile) !important;
+    padding-bottom: var(--section-spacing-mobile) !important;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
   }
-  to {
-    transform: rotate(360deg);
+
+  section:target,
+  section.active {
+    opacity: 1;
+  }
+
+  .product-card,
+  .presentation-card,
+  .guide-card {
+    transform: scale(0.95);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .product-card:active,
+  .presentation-card:active,
+  .guide-card:active {
+    transform: scale(0.98);
+  }
+
+  /* Improved gallery layout */
+  .gallery-card {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  /* Section headings */
+  .display-5 {
+    font-size: calc(1.8rem + 1.5vw);
+  }
+
+  /* Compact spacing */
+  .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  .mb-5 {
+    margin-bottom: 2rem !important;
+  }
+
+  /* Navigation improvements */
+  .navbar-collapse {
+    background-color: rgba(33, 37, 41, 0.95);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .nav-link-custom {
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.25rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Video background and video card styles */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.video-card .ratio,
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure the ratio container hides overflow so videos crop instead of showing black bars */
+.video-card .ratio {
+  overflow: hidden;
+}
+
+/* In some MDB ratio implementations the video may be absolutely positioned; make sure it covers */
+.video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+@media (max-width: 768px) {
+  .hero-overlay {
+    min-height: 360px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .hero-title {
+    font-size: 1.6rem;
+  }
 }

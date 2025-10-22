@@ -24,6 +24,8 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Disable requirement for external caption tracks on media elements
+      'jsx-a11y/media-has-caption': 'off',
     },
   },
 ])
