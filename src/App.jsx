@@ -19,6 +19,9 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBNavbarItem,
+  MDBCardSubTitle,
+  MDBCarousel,
+  MDBCarouselItem,
 } from "mdb-react-ui-kit";
 
 import "./index.css";
@@ -79,10 +82,15 @@ export default function App() {
     setStatus("Enviando...");
 
     try {
+      const formDataWithRecipients = {
+        ...formData,
+        _to: "info@retimaca.com,support@retimaca.com",
+      };
+
       const response = await fetch("https://formspree.io/f/mwppvrrg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataWithRecipients),
       });
 
       if (response.ok) {
@@ -90,7 +98,7 @@ export default function App() {
         const whatsappMsg = encodeURIComponent(
           `Nuevo mensaje de ${formData.name} (${formData.email}): ${formData.message}`
         );
-        window.open(`https://wa.me/18001234567?text=${whatsappMsg}`, "_blank");
+        window.open(`https://wa.me/17868507247?text=${whatsappMsg}`, "_blank");
         setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("Hubo un error al enviar el mensaje. Intenta nuevamente.");
@@ -110,15 +118,28 @@ export default function App() {
       />
     ));
   const [openNavNoTogglerThird, setOpenNavNoTogglerThird] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % gallery.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
+  };
 
   return (
     <div className="app-container">
-      
-      <MDBNavbar expand="lg" light bgColor="dark" style={{color: "rgb(244, 228, 193)"}}>
+      <MDBNavbar
+        expand="lg"
+        light
+        bgColor="dark"
+        style={{ color: "rgb(244, 228, 193)" }}
+      >
         <MDBContainer fluid>
           {" "}
           <MDBNavbarBrand
-          type="logo"
+            type="logo"
             className="fw-bold fs-3 d-flex align-items-center"
             style={{ color: "#f4e4c1" }}
           >
@@ -132,7 +153,6 @@ export default function App() {
           </MDBNavbarBrand>
           <MDBNavbarToggler
             type="button"
-            
             data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03"
             aria-expanded="false"
@@ -142,7 +162,6 @@ export default function App() {
           >
             <MDBIcon icon="bars" className="light-hamburger" fas />
           </MDBNavbarToggler>
-          
           <MDBCollapse navbar open={openNavNoTogglerThird}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
@@ -170,10 +189,7 @@ export default function App() {
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink
-                  href="#guias"
-                  className="nav-link-custom mx-2"
-                >
+                <MDBNavbarLink href="#guias" className="nav-link-custom mx-2">
                   Guías
                 </MDBNavbarLink>
               </MDBNavbarItem>
@@ -342,14 +358,6 @@ export default function App() {
                     <MDBCardText className="product-description">
                       {wood.description}
                     </MDBCardText>
-                    <MDBBtn
-                      color="warning"
-                      className="mt-3 fw-bold"
-                      style={{ borderRadius: "25px" }}
-                    >
-                      <MDBIcon fas icon="info-circle" className="me-2" />
-                      Más Info
-                    </MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -399,12 +407,8 @@ export default function App() {
                   </MDBCardText>
                   <div className="presentation-features">
                     <div className="feature-badge mb-2">
-                      <MDBIcon fas icon="truck" className="me-2" />
-                      Entrega incluida
-                    </div>
-                    <div className="feature-badge">
-                      <MDBIcon fas icon="certificate" className="me-2" />
-                      Calidad garantizada
+                      Ideales para pizzerías, parrillas, restaurantes latinos,
+                      carne en vara y pollos a la brasa.
                     </div>
                   </div>
                 </MDBCardBody>
@@ -433,12 +437,8 @@ export default function App() {
                   </MDBCardText>
                   <div className="presentation-features">
                     <div className="feature-badge mb-2">
-                      <MDBIcon fas icon="hand-holding" className="me-2" />
-                      Fácil manejo
-                    </div>
-                    <div className="feature-badge">
-                      <MDBIcon fas icon="clock" className="me-2" />
-                      Entrega rápida
+                      Perfectos para pizza casera, BBQ de domingo o parrilladas
+                      familiares.
                     </div>
                   </div>
                 </MDBCardBody>
@@ -454,40 +454,116 @@ export default function App() {
           <div className="text-center mb-5">
             <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
               <MDBIcon fas icon="images" className="me-3 text-info" />
-              Galería de Productos
+              Galería de Fotos
             </h2>
-            <div className="underline mx-auto mb-4"></div>
-            <p className="lead text-muted">
-              Conoce la calidad de nuestros productos
-            </p>
+            <small>
+              <p className="lead text-muted">
+                Conoce la calidad de nuestros productos, la excelencia de
+                nuestros trabajadores y la dicha de nuestra trayectoria con
+                estas imágenes
+              </p>
+            </small>
           </div>
-          <MDBRow className="g-4">
-            {gallery.map((item, index) => (
-              <MDBCol lg="3" md="6" key={index}>
-                <MDBCard className="gallery-card border-0 shadow-lg">
-                  <div className="gallery-image-container">
-                    <MDBCardImage
-                      src={item.src}
-                      alt={item.title}
-                      className="gallery-image"
-                    />
-                    <div className="gallery-overlay">
-                      <MDBIcon
-                        fas
-                        icon="search-plus"
-                        className="overlay-icon"
-                      />
-                    </div>
+          <div
+            className="position-relative"
+            style={{
+              height: window.innerWidth < 768 ? "350px" : "400px",
+              overflow: "hidden",
+            }}
+          >
+            <div className="d-flex align-items-center justify-content-center h-100">
+              {gallery.map((item, index) => {
+                const position =
+                  (index - currentSlide + gallery.length) % gallery.length;
+                let transform = "";
+                let opacity = 0;
+                let zIndex = 0;
+                let scale = 0.7;
+                const isMobile = window.innerWidth < 768;
+
+                if (position === 0) {
+                  transform = "translateX(0)";
+                  opacity = 1;
+                  zIndex = 3;
+                  scale = isMobile ? 0.9 : 1;
+                } else if (position === 1 || position === gallery.length - 1) {
+                  transform =
+                    position === 1
+                      ? `translateX(${isMobile ? "60%" : "80%"})`
+                      : `translateX(${isMobile ? "-60%" : "-80%"})`;
+                  opacity = isMobile ? 0.4 : 0.6;
+                  zIndex = 2;
+                  scale = isMobile ? 0.6 : 0.8;
+                } else if (position === 2 || position === gallery.length - 2) {
+                  transform =
+                    position === 2
+                      ? `translateX(${isMobile ? "120%" : "160%"})`
+                      : `translateX(${isMobile ? "-120%" : "-160%"})`;
+                  opacity = isMobile ? 0.2 : 0.3;
+                  zIndex = 1;
+                  scale = isMobile ? 0.5 : 0.7;
+                }
+
+                return (
+                  <div
+                    key={index}
+                    className="position-absolute"
+                    style={{
+                      transform: `${transform} scale(${scale})`,
+                      opacity,
+                      zIndex,
+                      transition: "all 0.5s ease-in-out",
+                      width: isMobile ? "220px" : "280px",
+                    }}
+                  >
+                    <MDBCard className="gallery-card border-0 shadow-lg">
+                      <div className="gallery-image-container">
+                        <MDBCardImage
+                          src={item.src}
+                          alt={item.title}
+                          className="gallery-image"
+                        />
+                        <div className="gallery-overlay">
+                          <MDBIcon
+                            fas
+                            icon="search-plus"
+                            className="overlay-icon"
+                          />
+                        </div>
+                      </div>
+                      <MDBCardBody className="p-3">
+                        <MDBCardText
+                          className="text-center gallery-title"
+                          style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
+                        >
+                          {item.title}
+                        </MDBCardText>
+                      </MDBCardBody>
+                    </MDBCard>
                   </div>
-                  <MDBCardBody className="p-3">
-                    <MDBCardText className="text-center gallery-title">
-                      {item.title}
-                    </MDBCardText>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            ))}
-          </MDBRow>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
+              onClick={prevSlide}
+              onKeyDown={(e) => e.key === 'Enter' && prevSlide()}
+              aria-label="Previous slide"
+            >
+      
+            </button>
+            <button
+              type="button"
+              className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right "
+              onClick={nextSlide}
+            
+              onKeyDown={(e) => e.key === 'Enter' && nextSlide()}
+              aria-label="Next slide"
+            >
+           
+            </button>
+          </div>
         </MDBContainer>
       </section>
 
@@ -555,7 +631,6 @@ export default function App() {
             </p>
           </div>
           <MDBRow className="justify-content-center align-items-center">
-            <MDBCol lg={3}className="mb-4"></MDBCol>
             <MDBCol lg="6" className="mb-4">
               <div className="delivery-info p-4">
                 <div className="delivery-feature mb-4">
@@ -595,26 +670,32 @@ export default function App() {
                 </div>
               </div>
             </MDBCol>
-            {/* <MDBCol lg="6">
-              <div className="delivery-image-container text-center">
-                <MDBIcon
-                  fas
-                  icon="shipping-fast"
-                  className="delivery-icon mb-3"
-                />
-                <h4 className="mb-3" style={{ color: "#8B4513" }}>
-                  ¡Entrega Gratuita!
-                </h4>
-                <p className="text-muted">En pedidos mayores a 1 pallet</p>
+            <MDBCol lg="6" className="mb-4">
+              <div className="map-container">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.8!2d-80.3344!3d25.6929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9c0a659e91c5b%3A0x123456789!2s9230%20SW%2071st%20St%2C%20Miami%2C%20FL%2033173!5e0!3m2!1sen!2sus!4v1234567890"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0, borderRadius: "10px" }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Retimaca Location"
+                ></iframe>
               </div>
-            </MDBCol> */}
-            <MDBCol md={3} className="mb-4"></MDBCol>
+            </MDBCol>
           </MDBRow>
         </MDBContainer>
       </section>
 
       {/* Guides Section */}
-      <section className="py-5" id="guias" style={{ background: "linear-gradient(135deg, #2c1810 0%, #4a2c0a 100%)" }}>
+      <section
+        className="py-5"
+        id="guias"
+        style={{
+          background: "linear-gradient(135deg, #2c1810 0%, #4a2c0a 100%)",
+        }}
+      >
         <MDBContainer>
           <div className="text-center mb-5">
             <h2 className="display-5 fw-bold mb-3 text-white">
@@ -622,23 +703,30 @@ export default function App() {
               Guías Rápidas
             </h2>
             <div className="underline-light mx-auto mb-4"></div>
-            <p className="lead text-light">Aprende más sobre la leña y su uso profesional</p>
+            <p className="lead text-light">
+              Aprende más sobre la leña y su uso profesional
+            </p>
           </div>
           <MDBRow className="g-4 justify-content-center">
             <MDBCol lg="5" md="6">
               <MDBCard className="guide-card h-100 border-0 shadow-lg">
                 <MDBCardBody className="text-center p-4">
                   <div className="guide-icon mb-3">
-                    <MDBIcon fas icon="sun" className="guide-icon-large text-warning" />
+                    <MDBIcon
+                      fas
+                      icon="sun"
+                      className="guide-icon-large text-warning"
+                    />
                   </div>
                   <MDBCardTitle className="guide-title mb-3">
                     Secado de Leña
                   </MDBCardTitle>
                   <MDBCardText className="guide-description mb-4">
-                    Descubre por qué es importante secar la leña, los diferentes métodos de secado y cómo afecta la calidad de combustión.
+                    Descubre por qué es importante secar la leña, los diferentes
+                    métodos de secado y cómo afecta la calidad de combustión.
                   </MDBCardText>
-                  <MDBBtn 
-                    color="warning" 
+                  <MDBBtn
+                    color="warning"
                     href="/guides/secado-de-lena.pdf"
                     target="_blank"
                     className="fw-bold"
@@ -654,17 +742,26 @@ export default function App() {
               <MDBCard className="guide-card h-100 border-0 shadow-lg">
                 <MDBCardBody className="text-center p-4">
                   <div className="guide-icon mb-3">
-                    <MDBIcon fas icon="map-marked-alt" className="guide-icon-large text-info" />
+                    <MDBIcon
+                      fas
+                      icon="map-marked-alt"
+                      className="guide-icon-large text-info"
+                    />
                   </div>
                   <MDBCardTitle className="guide-title mb-3">
-                    Hardwood en Miami
+                    Leña en Miami
                   </MDBCardTitle>
+                  <MDBCardSubTitle className="guide-description mb-4">
+                    Conoce los diferentes tipos de leña en Miami y sus
+                    características únicas.
+                  </MDBCardSubTitle>
                   <MDBCardText className="guide-description mb-4">
-                    Guía express sobre los tipos de leña dura disponibles en Miami y sus mejores usos para restaurantes y negocios.
+                    Guía express sobre los tipos de leña dura disponibles en
+                    Miami y sus mejores usos para restaurantes y negocios.
                   </MDBCardText>
-                  <MDBBtn 
-                    color="info" 
-                    href="/guides/guia-express-hardwood-miami.pdf"
+                  <MDBBtn
+                    color="info"
+                    href="/guides/guia-express-miami-hardwood.pdf"
                     target="_blank"
                     className="fw-bold"
                     style={{ borderRadius: "25px" }}
@@ -712,6 +809,7 @@ export default function App() {
                           onChange={handleChange}
                           required
                           className="mb-4 contact-input"
+                          placeholder="Ej: Juan Pérez"
                         />
                       </MDBCol>
                       <MDBCol md="6">
@@ -734,6 +832,7 @@ export default function App() {
                       onChange={handleChange}
                       required
                       className="mb-4 contact-input"
+                      placeholder="Ej: Necesito 2 pallets de leña Casuarina para mi restaurante. ¿Cuándo pueden entregar?"
                     />
                     <div className="text-center">
                       <MDBBtn
@@ -826,7 +925,7 @@ export default function App() {
               <div className="footer-info">
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="map-marker-alt" className="me-2" />
-                  Miami, FL
+                  9230 SW 71st St, Miami, FL 33173
                 </div>
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="clock" className="me-2" />

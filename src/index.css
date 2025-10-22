@@ -662,3 +662,41 @@ body {
     padding: 6px 12px;
   }
 }
+/* Gallery Arrow Styles */
+.gallery-arrow-left {
+  background-image: url('/left arrow.png');
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: left !important;
+  transition: all 0.3s ease !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left:0px;
+    z-index:5;
+}
+.gallery-arrow-right {
+  background-image: url('/right arrow.png');
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: right !important;
+  transition: all 0.3s ease !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index:5;
+
+}
+.gallery-arrow-right, .gallery-arrow-left {
+  transform: scale(1.1) !important;
+  
+}
+
+@media (max-width: 768px) {
+  .gallery-arrow {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
