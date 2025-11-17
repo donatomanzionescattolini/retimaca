@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import {
   MDBContainer,
   MDBNavbar,
@@ -23,221 +22,16 @@ import {
   MDBCardSubTitle,
 } from "mdb-react-ui-kit";
 
+import { woods, gallery, reviews, CONTACT_INFO } from './data/constants'
+import ScrollIndicator from './components/ScrollIndicator'
+import GalleryCarousel from './components/GalleryCarousel'
+import { useScrollSection } from './hooks/useScrollSection'
 import "./index.css";
 import "mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs";
 
-// Mobile scroll indicator component (visible on small screens)
-function ScrollIndicator({ currentSection }) {
-  const sections = [
-    "inicio",
-    "sobre-nosotros",
-    "productos",
-    "videos",
-    "galeria",
-    "opiniones",
-    "delivery",
-    "guias",
-    "contacto",
-  ];
 
-  return (
-    <div className="section-indicator d-block d-md-none" aria-hidden="false">
-      {sections.map((section) => (
-        <a
-          key={section}
-          href={`#${section}`}
-          className={`indicator-dot ${
-            currentSection === section ? "active" : ""
-          }`}
-          aria-label={`Go to ${section} section`}
-        />
-      ))}
-    </div>
-  );
-}
-ScrollIndicator.propTypes = {
-  currentSection: PropTypes.string,
-};
 
-// Extracted gallery carousel into its own component to reduce App complexity
-// Helper to compute gallery item layout
-function computeGalleryLayout(index, currentSlide, galleryLength, isMobile) {
-  const position = (index - currentSlide + galleryLength) % galleryLength;
 
-  const centerScale = isMobile ? 0.9 : 1;
-  const sideScale = isMobile ? 0.6 : 0.8;
-  const smallScale = isMobile ? 0.5 : 0.7;
-
-  const layouts = {
-    0: {
-      transform: "translateX(0)",
-      opacity: 1,
-      zIndex: 3,
-      scale: centerScale,
-    },
-    1: {
-      transform: `translateX(${isMobile ? "60%" : "80%"})`,
-      opacity: isMobile ? 0.4 : 0.6,
-      zIndex: 2,
-      scale: sideScale,
-    },
-    2: {
-      transform: `translateX(${isMobile ? "120%" : "160%"})`,
-      opacity: isMobile ? 0.2 : 0.3,
-      zIndex: 1,
-      scale: smallScale,
-    },
-    [-1 + galleryLength]: {
-      transform: `translateX(${isMobile ? "-60%" : "-80%"})`,
-      opacity: isMobile ? 0.4 : 0.6,
-      zIndex: 2,
-      scale: sideScale,
-    },
-    [-2 + galleryLength]: {
-      transform: `translateX(${isMobile ? "-120%" : "-160%"})`,
-      opacity: isMobile ? 0.2 : 0.3,
-      zIndex: 1,
-      scale: smallScale,
-    },
-  };
-
-  // Try exact position keys first
-  if (layouts[position]) return layouts[position];
-
-  // fallback for others
-  return {
-    transform: `translateX(${isMobile ? "200%" : "220%"})`,
-    opacity: 0,
-    zIndex: 0,
-    scale: isMobile ? 0.45 : 0.6,
-  };
-}
-
-function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
-  let isMobile = false;
-  if (globalThis.window) {
-    isMobile = globalThis.window.innerWidth < 768;
-  }
-
-  return (
-    <section id="galeria" className="py-5">
-      <MDBContainer>
-        <div className="text-center mb-5">
-          <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
-            <MDBIcon fas icon="images" className="me-3 text-info" />
-            Galería de Fotos
-          </h2>
-          <div className="underline mx-auto mb-4"></div>
-          <p
-            className="text-muted"
-            style={{
-              fontSize: "1rem",
-              maxWidth: "600px",
-              margin: "0 auto",
-              lineHeight: "1.6",
-              opacity: "0.9",
-            }}
-          >
-            Descubre nuestra pasión por la calidad y excelencia a través de
-            nuestra galería de imágenes
-          </p>
-        </div>
-        <div
-          className="position-relative"
-          style={{
-            height: isMobile ? "350px" : "400px",
-            overflow: "hidden",
-          }}
-        >
-          <div className="d-flex align-items-center justify-content-center h-100">
-            {gallery.map((item, index) => {
-              const { transform, opacity, zIndex, scale } =
-                computeGalleryLayout(
-                  index,
-                  currentSlide,
-                  gallery.length,
-                  isMobile
-                );
-
-              return (
-                <div
-                  key={item.src}
-                  className="position-absolute"
-                  style={{
-                    transform: `${transform} scale(${scale})`,
-                    opacity,
-                    zIndex,
-                    transition: "all 0.5s ease-in-out",
-                    width: isMobile ? "220px" : "280px",
-                  }}
-                >
-                  <MDBCard className="gallery-card border-0 shadow-lg">
-                    <div className="gallery-image-container">
-                      {item.type === "video" ? (
-                        <video
-                          src={item.src}
-                          className="gallery-image"
-                          controls
-                          playsInline
-                          preload="metadata"
-                          style={{ pointerEvents: "auto", zIndex: 10 }}
-                        />
-                      ) : (
-                        <>
-                          <MDBCardImage
-                            src={item.src}
-                            alt={item.title}
-                            className="gallery-image"
-                          />
-                          <div className="gallery-overlay">
-                            <MDBIcon
-                              fas
-                              icon="search-plus"
-                              className="overlay-icon"
-                            />
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    <MDBCardBody className="p-3">
-                      <MDBCardText
-                        className="text-center gallery-title"
-                        style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
-                      >
-                        {item.title}
-                      </MDBCardText>
-                    </MDBCardBody>
-                  </MDBCard>
-                </div>
-              );
-            })}
-          </div>
-          <button
-            type="button"
-            className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
-            onClick={prevSlide}
-            onKeyDown={(e) => e.key === "Enter" && prevSlide()}
-            aria-label="Previous slide"
-          ></button>
-          <button
-            type="button"
-            className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right "
-            onClick={nextSlide}
-            onKeyDown={(e) => e.key === "Enter" && nextSlide()}
-            aria-label="Next slide"
-          ></button>
-        </div>
-      </MDBContainer>
-    </section>
-  );
-}
-
-GalleryCarousel.propTypes = {
-  gallery: PropTypes.array.isRequired,
-  currentSlide: PropTypes.number.isRequired,
-  prevSlide: PropTypes.func.isRequired,
-  nextSlide: PropTypes.func.isRequired,
-};
 export default function App() {
   const [formData, setFormData] = useState({
     name: "",
@@ -250,72 +44,7 @@ export default function App() {
   });
   const [status, setStatus] = useState("");
 
-  const woods = [
-    {
-      name: "Casuarina",
-      description:
-        "Ideal para restaurantes que buscan una flama duradera y aroma suave.",
-      image: "/casuarina.jpg",
-    },
-    {
-      name: "Oak Blanco",
-      description:
-        "Leña densa, perfecta para ahumar carne y para hornos de alta temperatura.",
-      image: "/oak-blanco.jpg",
-    },
-  ];
 
-  const gallery = [
-    {
-      src: "/pallet.jpg",
-      title: "Pallet completo de leña seca",
-      type: "image",
-    },
-    { src: "/bundle.jpg", title: "Paquete de 5 piezas", type: "image" },
-    {
-      src: "/casuarina.jpg",
-      title: "Leña Casuarina lista para entrega",
-      type: "image",
-    },
-    { src: "/oak-blanco.jpg", title: "Leña Oak Blanco premium", type: "image" },
-    { src: "/video (1).mp4", title: "Servicio bajo la lluvia", type: "video" },
-    {
-      src: "/video (2).mp4",
-      title: "El secreto de la pizza bien hecha",
-      type: "video",
-    },
-    {
-      src: "/video (3).mp4",
-      title: "Nuestros trabajadores en accin",
-      type: "video",
-    },
-    { src: "/video (4).mp4", title: "Ejemplo de uso", type: "video" },
-    {
-      src: "/video (5).mp4",
-      title: "Tip para que el carbon dure mas",
-      type: "video",
-    },
-    { src: "/video (6).mp4", title: "Tip para encender", type: "video" },
-    { src: "/video (7).mp4", title: "Ejemplo de uso", type: "video" },
-  ];
-
-  const reviews = [
-    {
-      name: "Restaurante La Flama",
-      text: "Excelente calidad y puntualidad en las entregas. La Casuarina tiene una combustión perfecta.",
-      rating: 5,
-    },
-    {
-      name: "Parrilla El Roble",
-      text: "El mejor proveedor de leña que hemos tenido. Productos secos y bien cortados.",
-      rating: 5,
-    },
-    {
-      name: "Horno Artesano",
-      text: "Nos encanta su atención personalizada y la consistencia del producto.",
-      rating: 4,
-    },
-  ];
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -342,7 +71,7 @@ export default function App() {
           `Nuevo mensaje de ${formData.name} (${formData.email}): ${formData.message}`
         );
         window.open(
-          `https://wa.me/1786877$15187?text=${whatsappMsg}`,
+          `${CONTACT_INFO.whatsapp}?text=${whatsappMsg}`,
           "_blank"
         );
         setFormData({
@@ -373,42 +102,7 @@ export default function App() {
     ));
   const [openNavNoTogglerThird, setOpenNavNoTogglerThird] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentSection, setCurrentSection] = useState("");
-
-  // Function to update current section based on scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        "inicio",
-        "sobre-nosotros",
-        "productos",
-        "galeria",
-        "opiniones",
-        "delivery",
-        "guias",
-        "contacto",
-      ];
-      let current = "";
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100) {
-            // Adjusted for sticky header
-            current = section;
-          }
-        }
-      }
-
-      setCurrentSection(current);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const currentSection = useScrollSection();
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -424,7 +118,7 @@ export default function App() {
     <div className="app-container">
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/1786877$15187?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20de%20le%C3%B1a"
+        href={`${CONTACT_INFO.whatsapp}?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20de%20le%C3%B1a`}
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
@@ -833,7 +527,7 @@ export default function App() {
       />
 
       {/* Reviews */}
-      <section
+      {/* <section
         id="opiniones"
         className="py-5"
         style={{
@@ -875,7 +569,7 @@ export default function App() {
             ))}
           </MDBRow>
         </MDBContainer>
-      </section>
+      </section> */}
 
       {/* Delivery Section */}
       <section
@@ -939,14 +633,14 @@ export default function App() {
             <MDBCol lg="6" className="mb-4">
               <div className="map-container">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.8!2d-80.3344!3d25.6929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9c0a659e91c5b%3A0x123456789!2s9230%20SW%2071st%20St%2C%20Miami%2C%20FL%2033173!5e0!3m2!1sen!2sus!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.5!2d-80.4167!3d25.7617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a1c5f5c5c5%3A0x1234567890abcdef!2s12750%20NW%2017th%20St%20%23222%2C%20Miami%2C%20FL%2033182!5e0!3m2!1sen!2sus!4v1234567890"
                   width="100%"
                   height="300"
                   style={{ border: 0, borderRadius: "10px" }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Retimaca Location"
+                  title="Retimaca Location - 12750 NW 17th St #222"
                 ></iframe>
               </div>
             </MDBCol>
@@ -1180,7 +874,7 @@ export default function App() {
                     <MDBBtn
                       color="success"
                       size="lg"
-                      href="https://wa.me/1786877$15187"
+                      href={CONTACT_INFO.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="me-3 mb-3 px-4 py-3 fw-bold"
@@ -1192,7 +886,7 @@ export default function App() {
                     <MDBBtn
                       color="danger"
                       size="lg"
-                      href="https://www.instagram.com/hardwoodretimaca/"
+                      href={CONTACT_INFO.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mb-3 px-4 py-3 fw-bold"
@@ -1223,13 +917,13 @@ export default function App() {
               </p>
               <div className="footer-social">
                 <a
-                  href="https://wa.me/1786877$15187"
+                  href={CONTACT_INFO.whatsapp}
                   className="social-link me-3"
                 >
                   <MDBIcon fab icon="whatsapp" />
                 </a>
                 <a
-                  href="https://www.instagram.com/hardwoodretimaca/"
+                  href={CONTACT_INFO.instagram}
                   className="social-link"
                 >
                   <MDBIcon fab icon="instagram" />
@@ -1240,15 +934,15 @@ export default function App() {
               <div className="footer-info">
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="map-marker-alt" className="me-2" />
-                  12750 NW 17th Street #222, Miami, FL 33182
+                  {CONTACT_INFO.address}
                 </div>
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="clock" className="me-2" />
-                  Lunes - Viernes: 8:00 am - 6:00 pm
+                  {CONTACT_INFO.hours}
                 </div>
                 <div className="info-item">
                   <MDBIcon fas icon="phone" className="me-2" />
-                  +1 (786) 877-5187
+                  +1 ({CONTACT_INFO.phone.slice(1, 4)}) {CONTACT_INFO.phone.slice(4, 7)}-{CONTACT_INFO.phone.slice(7)}
                 </div>
               </div>
             </MDBCol>
