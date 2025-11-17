@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   MDBContainer,
   MDBNavbar,
@@ -29,15 +29,15 @@ import "mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs";
 // Mobile scroll indicator component (visible on small screens)
 function ScrollIndicator({ currentSection }) {
   const sections = [
-    'inicio',
-    'sobre-nosotros',
-    'productos',
-    'videos',
-    'galeria',
-    'opiniones',
-    'delivery',
-    'guias',
-    'contacto',
+    "inicio",
+    "sobre-nosotros",
+    "productos",
+    "videos",
+    "galeria",
+    "opiniones",
+    "delivery",
+    "guias",
+    "contacto",
   ];
 
   return (
@@ -46,7 +46,9 @@ function ScrollIndicator({ currentSection }) {
         <a
           key={section}
           href={`#${section}`}
-          className={`indicator-dot ${currentSection === section ? 'active' : ''}`}
+          className={`indicator-dot ${
+            currentSection === section ? "active" : ""
+          }`}
           aria-label={`Go to ${section} section`}
         />
       ))}
@@ -67,18 +69,48 @@ function computeGalleryLayout(index, currentSlide, galleryLength, isMobile) {
   const smallScale = isMobile ? 0.5 : 0.7;
 
   const layouts = {
-    0: { transform: 'translateX(0)', opacity: 1, zIndex: 3, scale: centerScale },
-    1: { transform: `translateX(${isMobile ? '60%' : '80%'})`, opacity: isMobile ? 0.4 : 0.6, zIndex: 2, scale: sideScale },
-    2: { transform: `translateX(${isMobile ? '120%' : '160%'})`, opacity: isMobile ? 0.2 : 0.3, zIndex: 1, scale: smallScale },
-    [-1 + galleryLength]: { transform: `translateX(${isMobile ? '-60%' : '-80%'})`, opacity: isMobile ? 0.4 : 0.6, zIndex: 2, scale: sideScale },
-    [-2 + galleryLength]: { transform: `translateX(${isMobile ? '-120%' : '-160%'})`, opacity: isMobile ? 0.2 : 0.3, zIndex: 1, scale: smallScale },
+    0: {
+      transform: "translateX(0)",
+      opacity: 1,
+      zIndex: 3,
+      scale: centerScale,
+    },
+    1: {
+      transform: `translateX(${isMobile ? "60%" : "80%"})`,
+      opacity: isMobile ? 0.4 : 0.6,
+      zIndex: 2,
+      scale: sideScale,
+    },
+    2: {
+      transform: `translateX(${isMobile ? "120%" : "160%"})`,
+      opacity: isMobile ? 0.2 : 0.3,
+      zIndex: 1,
+      scale: smallScale,
+    },
+    [-1 + galleryLength]: {
+      transform: `translateX(${isMobile ? "-60%" : "-80%"})`,
+      opacity: isMobile ? 0.4 : 0.6,
+      zIndex: 2,
+      scale: sideScale,
+    },
+    [-2 + galleryLength]: {
+      transform: `translateX(${isMobile ? "-120%" : "-160%"})`,
+      opacity: isMobile ? 0.2 : 0.3,
+      zIndex: 1,
+      scale: smallScale,
+    },
   };
 
   // Try exact position keys first
   if (layouts[position]) return layouts[position];
 
   // fallback for others
-  return { transform: `translateX(${isMobile ? '200%' : '220%'})`, opacity: 0, zIndex: 0, scale: isMobile ? 0.45 : 0.6 };
+  return {
+    transform: `translateX(${isMobile ? "200%" : "220%"})`,
+    opacity: 0,
+    zIndex: 0,
+    scale: isMobile ? 0.45 : 0.6,
+  };
 }
 
 function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
@@ -96,15 +128,18 @@ function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
             Galería de Fotos
           </h2>
           <div className="underline mx-auto mb-4"></div>
-          <p className="text-muted"
-             style={{
-               fontSize: "1rem",
-               maxWidth: "600px",
-               margin: "0 auto",
-               lineHeight: "1.6",
-               opacity: "0.9"
-             }}>
-            Descubre nuestra pasión por la calidad y excelencia a través de nuestra galería de imágenes
+          <p
+            className="text-muted"
+            style={{
+              fontSize: "1rem",
+              maxWidth: "600px",
+              margin: "0 auto",
+              lineHeight: "1.6",
+              opacity: "0.9",
+            }}
+          >
+            Descubre nuestra pasión por la calidad y excelencia a través de
+            nuestra galería de imágenes
           </p>
         </div>
         <div
@@ -116,7 +151,13 @@ function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
         >
           <div className="d-flex align-items-center justify-content-center h-100">
             {gallery.map((item, index) => {
-              const { transform, opacity, zIndex, scale } = computeGalleryLayout(index, currentSlide, gallery.length, isMobile);
+              const { transform, opacity, zIndex, scale } =
+                computeGalleryLayout(
+                  index,
+                  currentSlide,
+                  gallery.length,
+                  isMobile
+                );
 
               return (
                 <div
@@ -139,7 +180,7 @@ function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
                           controls
                           playsInline
                           preload="metadata"
-                          style={{ pointerEvents: 'auto', zIndex: 10 }}
+                          style={{ pointerEvents: "auto", zIndex: 10 }}
                         />
                       ) : (
                         <>
@@ -175,14 +216,14 @@ function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
             type="button"
             className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
             onClick={prevSlide}
-            onKeyDown={(e) => e.key === 'Enter' && prevSlide()}
+            onKeyDown={(e) => e.key === "Enter" && prevSlide()}
             aria-label="Previous slide"
           ></button>
           <button
             type="button"
             className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right "
             onClick={nextSlide}
-            onKeyDown={(e) => e.key === 'Enter' && nextSlide()}
+            onKeyDown={(e) => e.key === "Enter" && nextSlide()}
             aria-label="Next slide"
           ></button>
         </div>
@@ -201,6 +242,10 @@ export default function App() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    address: "",
+    city: "",
+    zipCode: "",
     message: "",
   });
   const [status, setStatus] = useState("");
@@ -215,24 +260,43 @@ export default function App() {
     {
       name: "Oak Blanco",
       description:
-        "Leña densa, perfecta para parrillas y hornos de alta temperatura.",
+        "Leña densa, perfecta para ahumar carne y para hornos de alta temperatura.",
       image: "/oak-blanco.jpg",
     },
   ];
 
   const gallery = [
-    { src: "/pallet.jpg", title: "Pallet completo de leña seca", type: "image" },
+    {
+      src: "/pallet.jpg",
+      title: "Pallet completo de leña seca",
+      type: "image",
+    },
     { src: "/bundle.jpg", title: "Paquete de 5 piezas", type: "image" },
-    { src: "/casuarina.jpg", title: "Leña Casuarina lista para entrega", type: "image" },
+    {
+      src: "/casuarina.jpg",
+      title: "Leña Casuarina lista para entrega",
+      type: "image",
+    },
     { src: "/oak-blanco.jpg", title: "Leña Oak Blanco premium", type: "image" },
     { src: "/video (1).mp4", title: "Servicio bajo la lluvia", type: "video" },
-    { src: "/video (2).mp4", title: "El secreto de la pizza bien hecha", type: "video" },
-    { src: "/video (3).mp4", title: "Nuestros trabajadores en accin", type: "video" },
+    {
+      src: "/video (2).mp4",
+      title: "El secreto de la pizza bien hecha",
+      type: "video",
+    },
+    {
+      src: "/video (3).mp4",
+      title: "Nuestros trabajadores en accin",
+      type: "video",
+    },
     { src: "/video (4).mp4", title: "Ejemplo de uso", type: "video" },
-    { src: "/video (5).mp4", title: "Tip para que el carbon dure mas", type: "video" },
+    {
+      src: "/video (5).mp4",
+      title: "Tip para que el carbon dure mas",
+      type: "video",
+    },
     { src: "/video (6).mp4", title: "Tip para encender", type: "video" },
     { src: "/video (7).mp4", title: "Ejemplo de uso", type: "video" },
-  
   ];
 
   const reviews = [
@@ -277,8 +341,19 @@ export default function App() {
         const whatsappMsg = encodeURIComponent(
           `Nuevo mensaje de ${formData.name} (${formData.email}): ${formData.message}`
         );
-        window.open(`https://wa.me/17868507247?text=${whatsappMsg}`, "_blank");
-        setFormData({ name: "", email: "", message: "" });
+        window.open(
+          `https://wa.me/1786877$15187?text=${whatsappMsg}`,
+          "_blank"
+        );
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          zipCode: "",
+          message: "",
+        });
       } else {
         setStatus("Hubo un error al enviar el mensaje. Intenta nuevamente.");
       }
@@ -303,26 +378,36 @@ export default function App() {
   // Function to update current section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['inicio', 'sobre-nosotros', 'productos', 'galeria', 'opiniones', 'delivery', 'guias', 'contacto'];
-      let current = '';
-      
+      const sections = [
+        "inicio",
+        "sobre-nosotros",
+        "productos",
+        "galeria",
+        "opiniones",
+        "delivery",
+        "guias",
+        "contacto",
+      ];
+      let current = "";
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 100) { // Adjusted for sticky header
+          if (rect.top <= 100) {
+            // Adjusted for sticky header
             current = section;
           }
         }
       }
-      
+
       setCurrentSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial check
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const nextSlide = () => {
@@ -339,7 +424,7 @@ export default function App() {
     <div className="app-container">
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/17868507247?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20de%20le%C3%B1a"
+        href="https://wa.me/1786877$15187?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20de%20le%C3%B1a"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
@@ -352,7 +437,12 @@ export default function App() {
         expand="lg"
         light
         bgColor="dark"
-        style={{ color: "rgb(244, 228, 193)", position: "sticky", top: 0, zIndex: 1000 }}
+        style={{
+          color: "rgb(244, 228, 193)",
+          position: "sticky",
+          top: 0,
+          zIndex: 1000,
+        }}
       >
         <MDBContainer fluid>
           {" "}
@@ -385,7 +475,9 @@ export default function App() {
               <MDBNavbarItem>
                 <MDBNavbarLink
                   href="#sobre-nosotros"
-                  className={`nav-link-custom mx-2 ${currentSection === 'sobre-nosotros' ? 'active' : ''}`}
+                  className={`nav-link-custom mx-2 ${
+                    currentSection === "sobre-nosotros" ? "active" : ""
+                  }`}
                 >
                   Sobre Nosotros
                 </MDBNavbarLink>
@@ -431,7 +523,9 @@ export default function App() {
             <div className="hero-content">
               <h1 className="display-3 fw-bold mb-4 text-white hero-title">
                 Leña Natural Premium{" "}
-                <span className="d-block text-warning">Para Tu Negocio</span>
+                <span className="d-block text-warning">
+                  Para Tu Negocio y Vivienda
+                </span>
               </h1>
               <p className="lead mb-5 text-light fs-4">
                 Productos seleccionados, secados al sol y listos para uso
@@ -490,7 +584,7 @@ export default function App() {
                 >
                   En <strong className="text-warning">Retimaca</strong>, nos
                   especializamos en el suministro de leña natural de alta
-                  calidad para restaurantes, hornos y negocios.
+                  calidad para restaurantes, viviendas, hornos y negocios.
                 </p>
                 <p
                   className="mb-4"
@@ -525,6 +619,18 @@ export default function App() {
                       className="text-success me-2"
                     />
                     <span>Servicio personalizado</span>
+                  </div>
+                  <div className="feature-item">
+                    <MDBIcon
+                      fas
+                      icon="check-circle"
+                      className="text-success me-2"
+                    />
+                    <span>
+                      Ofrecemos paletas de 40 x 48 x 36 pulgadas
+                      <br />
+                      <i>o </i>1.5 yardas cúbicas
+                    </span>
                   </div>
                 </div>
               </div>
@@ -700,8 +806,8 @@ export default function App() {
                     Paquetes (5 piezas de 15")
                   </MDBCardTitle>
                   <MDBCardText className="presentation-description mb-4">
-                    Presentación compacta, ideal para restaurantes o negocios
-                    con espacio limitado.
+                    Presentación compacta, ideal para viviendas o negocios con
+                    espacio limitado.
                   </MDBCardText>
                   <div className="presentation-features">
                     <div className="feature-badge mb-2">
@@ -719,7 +825,12 @@ export default function App() {
       {/* Videos */}
 
       {/* Gallery */}
-      <GalleryCarousel gallery={gallery} currentSlide={currentSlide} prevSlide={prevSlide} nextSlide={nextSlide} />
+      <GalleryCarousel
+        gallery={gallery}
+        currentSlide={currentSlide}
+        prevSlide={prevSlide}
+        nextSlide={nextSlide}
+      />
 
       {/* Reviews */}
       <section
@@ -841,7 +952,7 @@ export default function App() {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
-      </section> 
+      </section>
 
       {/* Guides Section */}
       <section
@@ -912,7 +1023,7 @@ export default function App() {
                   </MDBCardSubTitle>
                   <MDBCardText className="guide-description mb-4">
                     Guía express sobre los tipos de leña dura disponibles en
-                    Miami y sus mejores usos para restaurantes y negocios.
+                    Miami y sus mejores usos para restaurantes y viviendas.
                   </MDBCardText>
                   <MDBBtn
                     color="info"
@@ -979,6 +1090,55 @@ export default function App() {
                         />
                       </MDBCol>
                     </MDBRow>
+                    <MDBRow>
+                      <MDBCol md="6">
+                        <MDBInput
+                          type="tel"
+                          label="Número de teléfono"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          required
+                          className="mb-4 contact-input"
+                          placeholder="Ej: (786) 123-4567"
+                        />
+                      </MDBCol>
+                      <MDBCol md="6">
+                        <MDBInput
+                          label="Dirección"
+                          name="address"
+                          value={formData.address}
+                          onChange={handleChange}
+                          required
+                          className="mb-4 contact-input"
+                          placeholder="Ej: 123 SW 8th St"
+                        />
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol md="6">
+                        <MDBInput
+                          label="Ciudad"
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          required
+                          className="mb-4 contact-input"
+                          placeholder="Ej: Miami"
+                        />
+                      </MDBCol>
+                      <MDBCol md="6">
+                        <MDBInput
+                          label="Código postal"
+                          name="zipCode"
+                          value={formData.zipCode}
+                          onChange={handleChange}
+                          required
+                          className="mb-4 contact-input"
+                          placeholder="Ej: 33173"
+                        />
+                      </MDBCol>
+                    </MDBRow>
                     <MDBTextArea
                       label="Mensaje o pedido"
                       name="message"
@@ -1020,7 +1180,7 @@ export default function App() {
                     <MDBBtn
                       color="success"
                       size="lg"
-                      href="https://wa.me/17868507247"
+                      href="https://wa.me/1786877$15187"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="me-3 mb-3 px-4 py-3 fw-bold"
@@ -1063,7 +1223,7 @@ export default function App() {
               </p>
               <div className="footer-social">
                 <a
-                  href="https://wa.me/17868507247"
+                  href="https://wa.me/1786877$15187"
                   className="social-link me-3"
                 >
                   <MDBIcon fab icon="whatsapp" />
@@ -1080,7 +1240,7 @@ export default function App() {
               <div className="footer-info">
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="map-marker-alt" className="me-2" />
-                  8781 SW 72nd St, Miami, FL 33173
+                  12750 NW 17th Street #222, Miami, FL 33182
                 </div>
                 <div className="info-item mb-2">
                   <MDBIcon fas icon="clock" className="me-2" />
@@ -1088,7 +1248,7 @@ export default function App() {
                 </div>
                 <div className="info-item">
                   <MDBIcon fas icon="phone" className="me-2" />
-                  +1 (786) 850-7247
+                  +1 (786) 877-5187
                 </div>
               </div>
             </MDBCol>

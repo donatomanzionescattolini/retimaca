@@ -238,7 +238,7 @@ export default function App() {
             <div className="hero-content">
               <h1 className="display-3 fw-bold mb-4 text-white hero-title">
                 Leña Natural Premium
-                <span className="d-block text-warning">Para Tu Negocio</span>
+                <span className="d-block text-warning">Para Tu Negocio y Vivienda</span>
               </h1>
               <p className="lead mb-5 text-light fs-4">
                 Productos seleccionados, secados al sol y listos para uso
@@ -740,7 +740,7 @@ export default function App() {
                     <MDBBtn
                       color="success"
                       size="lg"
-                      href="https://wa.me/17868507247"
+                      href="https://wa.me/1786877$15187"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="me-3 mb-3 px-4 py-3 fw-bold"
@@ -783,7 +783,7 @@ export default function App() {
               </p>
               <div className="footer-social">
                 <a
-                  href="https://wa.me/17868507247"
+                  href="https://wa.me/1786877$15187"
                   className="social-link me-3"
                 >
                   <MDBIcon fab icon="whatsapp" />
@@ -808,7 +808,7 @@ export default function App() {
                 </div>
                 <div className="info-item">
                   <MDBIcon fas icon="phone" className="me-2" />
-                  +1 (786) 850-7247
+                  +1 (786) 877-5187
                 </div>
               </div>
             </MDBCol>

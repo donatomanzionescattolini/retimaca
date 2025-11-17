@@ -8,7 +8,7 @@ export default function Hero() {
           <div className="hero-content">
             <h1 className="display-3 fw-bold mb-4 text-white hero-title">
               Leña Natural Premium
-              <span className="d-block text-warning">Para Tu Negocio</span>
+              <span className="d-block text-warning">Para Tu Negocio y Vivienda</span>
             </h1>
             <p className="lead mb-5 text-light fs-4">
               Productos seleccionados, secados al sol y listos para uso profesional
