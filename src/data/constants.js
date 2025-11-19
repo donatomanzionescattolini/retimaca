@@ -11,7 +11,7 @@ export const woods = [
   {
     name: "Casuarina",
     description: "Ideal para restaurantes que buscan una flama duradera y aroma suave.",
-    image: "/casuarina.jpg",
+    image: "/casuarina-arbol.jpg",
   },
   {
     name: "Oak Blanco",
