@@ -44,6 +44,16 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
           />
           <span className="brand-text">Retimaca</span>
         </MDBNavbarBrand>
+        <MDBBtn
+          color="warning"
+          size="sm"
+          onClick={toggleLanguage}
+          className="d-lg-none me-2"
+          style={{ borderRadius: '20px' }}
+        >
+          <MDBIcon fas icon="language" className="me-1" />
+          {lang === 'es' ? 'EN' : 'ES'}
+        </MDBBtn>
         <MDBNavbarToggler
           type="button"
           aria-label="Toggle navigation"
@@ -93,7 +103,7 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
                 {t.contact}
               </MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
+            <MDBNavbarItem className="d-none d-lg-block">
               <MDBBtn
                 color="warning"
                 size="sm"
