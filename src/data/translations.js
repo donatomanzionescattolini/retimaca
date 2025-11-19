@@ -183,7 +183,7 @@ export const translations = {
       types: {
         title: 'Firewood in Miami',
         subtitle: 'Learn about the different types of firewood in Miami and their unique characteristics.',
-        description: 'Express guide on the types of hardwood available in Miami and their best uses for restaurants and homes.'
+        description: 'Express guide on the types of firewood available in Miami and their best uses for restaurants and homes.'
       },
       download: 'Download PDF'
     },

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://retimaca.vercel.app/sitemap.xml

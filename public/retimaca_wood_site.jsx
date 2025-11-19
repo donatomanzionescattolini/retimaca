@@ -752,7 +752,7 @@ export default function App() {
                     <MDBBtn
                       color="danger"
                       size="lg"
-                      href="https://www.instagram.com/hardwoodretimaca/"
+                      href="https://www.instagram.com/firewoodretimaca/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mb-3 px-4 py-3 fw-bold"
@@ -789,7 +789,7 @@ export default function App() {
                   <MDBIcon fab icon="whatsapp" />
                 </a>
                 <a
-                  href="https://www.instagram.com/hardwoodretimaca/"
+                  href="https://www.instagram.com/firewoodretimaca/"
                   className="social-link"
                 >
                   <MDBIcon fab icon="instagram" />

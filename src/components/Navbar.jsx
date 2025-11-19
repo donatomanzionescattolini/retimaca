@@ -12,7 +12,7 @@ export default function Navbar() {
     >
       <MDBNavbarBrand href="#" className="fw-bold fs-3 d-flex align-items-center" style={{ color: "#f4e4c1" }}>
         <img src="/logo.png" alt="Logo" className="me-2 img-fluid" style={{ width: "40px", height: "40px" }} />
-        Hardwood Retimaca
+        Firewood Retimaca
       </MDBNavbarBrand>
       <MDBNavbarNav className="ms-auto">
         <MDBNavbarLink href="#sobre-nosotros" className="nav-link-custom mx-2">Sobre Nosotros</MDBNavbarLink>

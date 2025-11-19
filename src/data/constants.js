@@ -4,7 +4,7 @@ export const CONTACT_INFO = {
   email: 'info@retimaca.com',
   address: '12750 NW 17th Street #222, Miami, FL 33182',
   hours: 'Lunes - Viernes: 8:00 am - 6:00 pm',
-  instagram: 'https://www.instagram.com/hardwoodretimaca/'
+  instagram: 'https://www.instagram.com/firewoodretimaca/'
 }
 
 export const woods = [
