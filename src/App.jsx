@@ -14,12 +14,14 @@ import GuidesSection from './components/GuidesSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import { useScrollSection } from './hooks/useScrollSection'
+import { useLanguage } from './hooks/useLanguage'
 import './index.css'
 import 'mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs'
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const currentSection = useScrollSection()
+  const { lang, toggleLanguage } = useLanguage()
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length)
@@ -41,22 +43,22 @@ export default function App() {
         <MDBIcon fab icon="whatsapp" className="whatsapp-icon" />
       </a>
       <ScrollIndicator currentSection={currentSection} />
-      <NavigationBar currentSection={currentSection} />
-      <HeroSection />
-      <AboutSection />
-      <ProductsSection woods={woods} />
-      <PresentationSection />
+      <NavigationBar currentSection={currentSection} lang={lang} toggleLanguage={toggleLanguage} />
+      <HeroSection lang={lang} />
+      <AboutSection lang={lang} />
+      <ProductsSection woods={woods} lang={lang} />
+      <PresentationSection lang={lang} />
       <GalleryCarousel
         gallery={gallery}
         currentSlide={currentSlide}
         prevSlide={prevSlide}
         nextSlide={nextSlide}
       />
-      {/*<ReviewsSection reviews={reviews} />*/}
-      <DeliverySection />
-      <GuidesSection />
-      <ContactSection />
-      <Footer />
+      {/*<ReviewsSection reviews={reviews} lang={lang} />*/}
+      <DeliverySection lang={lang} />
+      <GuidesSection lang={lang} />
+      <ContactSection lang={lang} />
+      <Footer lang={lang} />
     </div>
   )
 }

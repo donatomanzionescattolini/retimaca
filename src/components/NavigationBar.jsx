@@ -9,10 +9,13 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBIcon,
+  MDBBtn,
 } from 'mdb-react-ui-kit'
 import PropTypes from 'prop-types'
+import { translations } from '../data/translations'
 
-export default function NavigationBar({ currentSection }) {
+export default function NavigationBar({ currentSection, lang, toggleLanguage }) {
+  const t = translations[lang].nav
   const [openNav, setOpenNav] = useState(false)
 
   return (
@@ -58,7 +61,7 @@ export default function NavigationBar({ currentSection }) {
                   currentSection === "sobre-nosotros" ? "active" : ""
                 }`}
               >
-                Sobre Nosotros
+                {t.about}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
@@ -66,7 +69,7 @@ export default function NavigationBar({ currentSection }) {
                 href="#productos"
                 className="nav-link-custom mx-2"
               >
-                Productos
+                {t.products}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
@@ -74,12 +77,12 @@ export default function NavigationBar({ currentSection }) {
                 href="#delivery"
                 className="nav-link-custom mx-2"
               >
-                Delivery
+                {t.delivery}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="#guias" className="nav-link-custom mx-2">
-                Guías
+                {t.guides}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
@@ -87,8 +90,20 @@ export default function NavigationBar({ currentSection }) {
                 href="#contacto"
                 className="nav-link-custom mx-2"
               >
-                Contacto
+                {t.contact}
               </MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBBtn
+                color="warning"
+                size="sm"
+                onClick={toggleLanguage}
+                className="ms-2"
+                style={{ borderRadius: '20px' }}
+              >
+                <MDBIcon fas icon="language" className="me-1" />
+                {lang === 'es' ? 'EN' : 'ES'}
+              </MDBBtn>
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
@@ -99,4 +114,6 @@ export default function NavigationBar({ currentSection }) {
 
 NavigationBar.propTypes = {
   currentSection: PropTypes.string,
+  lang: PropTypes.string.isRequired,
+  toggleLanguage: PropTypes.func.isRequired,
 }

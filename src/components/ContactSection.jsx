@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBTextArea, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 import { CONTACT_INFO } from '../data/constants'
+import { translations } from '../data/translations'
 
-export default function ContactSection() {
+export default function ContactSection({ lang }) {
+  const t = translations[lang].contact
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +22,7 @@ export default function ContactSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setStatus("Enviando...")
+    setStatus(t.sending)
 
     try {
       const formDataWithRecipients = {
@@ -34,7 +37,7 @@ export default function ContactSection() {
       })
 
       if (response.ok) {
-        setStatus("Mensaje enviado con éxito. ¡Gracias por contactarnos!")
+        setStatus(t.success)
         const whatsappMsg = encodeURIComponent(
           `Nuevo mensaje de ${formData.name} (${formData.email}): ${formData.message}`
         )
@@ -52,10 +55,10 @@ export default function ContactSection() {
           message: "",
         })
       } else {
-        setStatus("Hubo un error al enviar el mensaje. Intenta nuevamente.")
+        setStatus(t.error)
       }
     } catch {
-      setStatus("No se pudo enviar el mensaje. Verifica tu conexión.")
+      setStatus(t.networkError)
     }
   }
 
@@ -71,11 +74,11 @@ export default function ContactSection() {
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
             <MDBIcon fas icon="envelope" className="me-3 text-danger" />
-            ¿Listo para hacer tu pedido?
+            {t.title}
           </h2>
           <div className="underline mx-auto mb-4"></div>
           <p className="lead text-muted">
-            Contáctanos y recibe tu leña premium
+            {t.subtitle}
           </p>
         </div>
         <MDBRow className="justify-content-center">
@@ -86,19 +89,18 @@ export default function ContactSection() {
                   <MDBRow>
                     <MDBCol md="6">
                       <MDBInput
-                        label="Tu nombre"
+                        label={t.name}
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
                         className="mb-4 contact-input"
-                        placeholder="Ej: Juan Pérez"
                       />
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput
                         type="email"
-                        label="Tu correo electrónico"
+                        label={t.email}
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -111,60 +113,55 @@ export default function ContactSection() {
                     <MDBCol md="6">
                       <MDBInput
                         type="tel"
-                        label="Número de teléfono"
+                        label={t.phone}
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         required
                         className="mb-4 contact-input"
-                        placeholder="Ej: (786) 123-4567"
                       />
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput
-                        label="Dirección"
+                        label={t.address}
                         name="address"
                         value={formData.address}
                         onChange={handleChange}
                         required
                         className="mb-4 contact-input"
-                        placeholder="Ej: 123 SW 8th St"
                       />
                     </MDBCol>
                   </MDBRow>
                   <MDBRow>
                     <MDBCol md="6">
                       <MDBInput
-                        label="Ciudad"
+                        label={t.city}
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
                         required
                         className="mb-4 contact-input"
-                        placeholder="Ej: Miami"
                       />
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput
-                        label="Código postal"
+                        label={t.zipCode}
                         name="zipCode"
                         value={formData.zipCode}
                         onChange={handleChange}
                         required
                         className="mb-4 contact-input"
-                        placeholder="Ej: 33173"
                       />
                     </MDBCol>
                   </MDBRow>
                   <MDBTextArea
-                    label="Mensaje o pedido"
+                    label={t.message}
                     name="message"
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
                     required
                     className="mb-4 contact-input"
-                    placeholder="Ej: Necesito 2 pallets de leña Casuarina para mi restaurante. ¿Cuándo pueden entregar?"
                   />
                   <div className="text-center">
                     <MDBBtn
@@ -175,7 +172,7 @@ export default function ContactSection() {
                       style={{ borderRadius: "50px" }}
                     >
                       <MDBIcon fas icon="paper-plane" className="me-2" />
-                      Enviar Mensaje
+                      {t.send}
                     </MDBBtn>
                   </div>
                   {status && (
@@ -189,7 +186,7 @@ export default function ContactSection() {
 
                 <div className="contact-divider my-5">
                   <span className="divider-text">
-                    O contáctanos directamente
+                    {t.or}
                   </span>
                 </div>
 
@@ -226,4 +223,8 @@ export default function ContactSection() {
       </MDBContainer>
     </section>
   )
+}
+
+ContactSection.propTypes = {
+  lang: PropTypes.string.isRequired,
 }

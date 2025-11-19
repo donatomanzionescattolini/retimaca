@@ -1,6 +1,10 @@
+import PropTypes from 'prop-types'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit'
+import { translations } from '../data/translations'
 
-export default function DeliverySection() {
+export default function DeliverySection({ lang }) {
+  const t = translations[lang].delivery
+
   return (
     <section
       id="delivery"
@@ -13,11 +17,11 @@ export default function DeliverySection() {
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
             <MDBIcon fas icon="truck" className="me-3 text-primary" />
-            Delivery en Miami
+            {t.title}
           </h2>
           <div className="underline mx-auto mb-4"></div>
           <p className="lead text-muted">
-            Servicio de entrega confiable y puntual
+            {t.subtitle}
           </p>
         </div>
         <MDBRow className="justify-content-center align-items-center">
@@ -26,9 +30,9 @@ export default function DeliverySection() {
               <div className="delivery-feature mb-4">
                 <MDBIcon fas icon="clock" className="feature-icon me-3" />
                 <div>
-                  <h5 className="mb-2">Horarios de Entrega</h5>
+                  <h5 className="mb-2">{t.schedule}</h5>
                   <p className="text-muted mb-0">
-                    Lunes a viernes, 8:00 am a 6:00 pm
+                    {t.scheduleText}
                   </p>
                 </div>
               </div>
@@ -39,9 +43,9 @@ export default function DeliverySection() {
                   className="feature-icon me-3"
                 />
                 <div>
-                  <h5 className="mb-2">Área de Cobertura</h5>
+                  <h5 className="mb-2">{t.coverage}</h5>
                   <p className="text-muted mb-0">
-                    Todo el área metropolitana de Miami
+                    {t.coverageText}
                   </p>
                 </div>
               </div>
@@ -52,9 +56,9 @@ export default function DeliverySection() {
                   className="feature-icon me-3"
                 />
                 <div>
-                  <h5 className="mb-2">Garantía de Calidad</h5>
+                  <h5 className="mb-2">{t.quality}</h5>
                   <p className="text-muted mb-0">
-                    Nos encargamos de todos los palets y leña
+                    {t.qualityText}
                   </p>
                 </div>
               </div>
@@ -78,4 +82,8 @@ export default function DeliverySection() {
       </MDBContainer>
     </section>
   )
+}
+
+DeliverySection.propTypes = {
+  lang: PropTypes.string.isRequired,
 }

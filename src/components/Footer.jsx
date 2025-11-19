@@ -1,7 +1,11 @@
+import PropTypes from 'prop-types'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit'
 import { CONTACT_INFO } from '../data/constants'
+import { translations } from '../data/translations'
 
-export default function Footer() {
+export default function Footer({ lang }) {
+  const t = translations[lang].footer
+
   return (
     <footer className="footer-custom py-5">
       <MDBContainer>
@@ -12,7 +16,7 @@ export default function Footer() {
               Retimaca
             </h5>
             <p className="footer-text mb-3">
-              Leña natural premium para tu negocio
+              {t.tagline}
             </p>
             <div className="footer-social">
               <a
@@ -49,11 +53,14 @@ export default function Footer() {
         <hr className="footer-divider my-4" />
         <div className="text-center">
           <p className="footer-copyright mb-0">
-            © {new Date().getFullYear()} Retimaca. Todos los derechos
-            reservados.
+            © {new Date().getFullYear()} Retimaca. {t.rights}
           </p>
         </div>
       </MDBContainer>
     </footer>
   )
+}
+
+Footer.propTypes = {
+  lang: PropTypes.string.isRequired,
 }

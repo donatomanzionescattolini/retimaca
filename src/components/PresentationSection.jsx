@@ -1,6 +1,10 @@
+import PropTypes from 'prop-types'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBIcon } from 'mdb-react-ui-kit'
+import { translations } from '../data/translations'
 
-export default function PresentationSection() {
+export default function PresentationSection({ lang }) {
+  const t = translations[lang].presentation
+
   return (
     <section
       className="py-5"
@@ -12,11 +16,11 @@ export default function PresentationSection() {
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
             <MDBIcon fas icon="boxes" className="me-3 text-warning" />
-            Formas de Presentación
+            {t.title}
           </h2>
           <div className="underline mx-auto mb-4"></div>
           <p className="lead text-muted">
-            Adaptamos nuestros productos a tus necesidades
+            {t.subtitle}
           </p>
         </div>
         <MDBRow className="justify-content-center g-4">
@@ -29,21 +33,19 @@ export default function PresentationSection() {
                   className="presentation-image"
                 />
                 <div className="presentation-badge">
-                  <span className="badge-text">MAYOREO</span>
+                  <span className="badge-text">{t.pallet.badge}</span>
                 </div>
               </div>
               <MDBCardBody className="text-center p-4">
                 <MDBCardTitle className="presentation-title mb-3">
-                  Pallet (1.5 cubic yards)
+                  {t.pallet.title}
                 </MDBCardTitle>
                 <MDBCardText className="presentation-description mb-4">
-                  Leña seleccionada, cortada y apilada cuidadosamente. Ideal
-                  para alto consumo.
+                  {t.pallet.description}
                 </MDBCardText>
                 <div className="presentation-features">
                   <div className="feature-badge mb-2">
-                    Ideales para pizzerías, parrillas, restaurantes latinos,
-                    carne en vara y pollos a la brasa.
+                    {t.pallet.use}
                   </div>
                 </div>
               </MDBCardBody>
@@ -59,21 +61,19 @@ export default function PresentationSection() {
                   className="presentation-image"
                 />
                 <div className="presentation-badge">
-                  <span className="badge-text">MENUDEO</span>
+                  <span className="badge-text">{t.bundle.badge}</span>
                 </div>
               </div>
               <MDBCardBody className="text-center p-4">
                 <MDBCardTitle className="presentation-title mb-3">
-                  Paquetes (5 piezas de 15")
+                  {t.bundle.title}
                 </MDBCardTitle>
                 <MDBCardText className="presentation-description mb-4">
-                  Presentación compacta, ideal para viviendas o negocios con
-                  espacio limitado.
+                  {t.bundle.description}
                 </MDBCardText>
                 <div className="presentation-features">
                   <div className="feature-badge mb-2">
-                    Perfectos para pizza casera, BBQ de domingo o parrilladas
-                    familiares.
+                    {t.bundle.use}
                   </div>
                 </div>
               </MDBCardBody>
@@ -83,4 +83,8 @@ export default function PresentationSection() {
       </MDBContainer>
     </section>
   )
+}
+
+PresentationSection.propTypes = {
+  lang: PropTypes.string.isRequired,
 }
