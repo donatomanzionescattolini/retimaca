@@ -53,6 +53,7 @@ export default function App() {
         currentSlide={currentSlide}
         prevSlide={prevSlide}
         nextSlide={nextSlide}
+        lang={lang}
       />
       {/*<ReviewsSection reviews={reviews} lang={lang} />*/}
       <DeliverySection lang={lang} />

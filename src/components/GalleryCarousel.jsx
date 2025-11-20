@@ -6,6 +6,7 @@ import {
     MDBCardBody,
     MDBIcon, MDBCardText, MDBCardImage,
 } from 'mdb-react-ui-kit';
+import { translations } from '../data/translations'
 
 
 function computeGalleryLayout(index, currentSlide, galleryLength, isMobile) {
@@ -58,8 +59,9 @@ function computeGalleryLayout(index, currentSlide, galleryLength, isMobile) {
   }
 }
 
-export default function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide }) {
+export default function GalleryCarousel({ gallery, currentSlide, prevSlide, nextSlide, lang }) {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const t = translations[lang].gallery
 
   return (
     <section id="galeria" className="py-5">
@@ -67,7 +69,7 @@ export default function GalleryCarousel({ gallery, currentSlide, prevSlide, next
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3" style={{ color: "#8B4513" }}>
             <MDBIcon fas icon="images" className="me-3 text-info" />
-            Galería de Fotos
+            {t.title}
           </h2>
           <div className="underline mx-auto mb-4"></div>
           <p
@@ -80,8 +82,7 @@ export default function GalleryCarousel({ gallery, currentSlide, prevSlide, next
               opacity: "0.9",
             }}
           >
-            Descubre nuestra pasión por la calidad y excelencia a través de
-            nuestra galería de imágenes
+            {t.description}
           </p>
         </div>
         <div
@@ -179,4 +180,5 @@ GalleryCarousel.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   prevSlide: PropTypes.func.isRequired,
   nextSlide: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
 }
