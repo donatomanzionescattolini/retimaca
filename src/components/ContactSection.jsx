@@ -177,7 +177,10 @@ export default function ContactSection({ lang }) {
                   </div>
                   {status && (
                     <div className="text-center mt-4">
-                      <div className="alert alert-info" role="alert">
+                      <div 
+                        className={`alert ${status.includes(t.success) ? 'alert-success' : status.includes(t.sending) ? 'alert-info' : 'alert-danger'}`} 
+                        role="alert"
+                      >
                         {status}
                       </div>
                     </div>

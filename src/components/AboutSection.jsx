@@ -56,9 +56,10 @@ export default function AboutSection({ lang }) {
             <div className="about-image-container">
               <img
                 src="/pallet.jpg"
-                alt="Retimaca leña premium"
+                alt="Retimaca premium firewood pallet - kiln-dried hardwood for Miami restaurants"
                 className="img-fluid rounded-4 shadow-lg"
                 style={{ transform: "rotate(-2deg)" }}
+                loading="lazy"
               />
             </div>
           </MDBCol>
