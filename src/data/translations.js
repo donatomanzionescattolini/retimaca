@@ -102,6 +102,43 @@ export const translations = {
     footer: {
       tagline: 'Leña natural premium para tu negocio',
       rights: 'Todos los derechos reservados.'
+    },
+    trust: {
+      clients: 'Clientes Satisfechos',
+      sameDay: 'Mismo Día',
+      delivery: 'Entrega Disponible',
+      rating: 'Calificación Promedio',
+      quality: 'Garantía de Calidad'
+    },
+    faq: {
+      title: 'Preguntas Frecuentes',
+      subtitle: 'Respuestas a las preguntas más comunes sobre nuestros productos y servicios',
+      questions: [
+        {
+          question: '¿Cuánto dura un pallet de leña para un restaurante?',
+          answer: 'Depende del uso, pero en promedio un pallet de 1.5 yardas cúbicas dura entre 1-2 semanas para un restaurante con horno de pizza o parrilla de uso intensivo. Para uso residencial, puede durar varios meses.'
+        },
+        {
+          question: '¿Hacen entregas el mismo día?',
+          answer: 'Sí, ofrecemos entrega el mismo día en toda el área metropolitana de Miami si realizas tu pedido antes de las 2:00 pm. Horario de entrega: Lunes a Viernes, 8:00 am - 6:00 pm.'
+        },
+        {
+          question: '¿Qué diferencia hay entre Casuarina y Oak Blanco?',
+          answer: 'La Casuarina (Pino Australiano) es ideal para flama rápida y constante, perfecta para hornos de pizza. El Oak Blanco (Roble Blanco) es más denso, arde más lento y es perfecto para ahumar carnes y hornos de alta temperatura.'
+        },
+        {
+          question: '¿La leña está seca y lista para usar?',
+          answer: 'Sí, toda nuestra leña está secada al sol y lista para uso inmediato. Garantizamos baja humedad para una combustión eficiente y sin exceso de humo.'
+        },
+        {
+          question: '¿Cuál es el pedido mínimo?',
+          answer: 'Para entregas a domicilio, el pedido mínimo es de 1 pallet (1.5 yardas cúbicas). También ofrecemos paquetes de 5 piezas para compras menores, disponibles para recogida o entrega local.'
+        },
+        {
+          question: '¿Entregan en toda el área de Miami?',
+          answer: 'Sí, entregamos en Miami, Doral, Kendall, Hialeah, Coral Gables, Homestead, Miami Lakes, Pembroke Pines, Fort Lauderdale, Aventura y áreas circundantes.'
+        }
+      ]
     }
   },
   en: {
@@ -207,6 +244,43 @@ export const translations = {
     footer: {
       tagline: 'Premium natural firewood for your business',
       rights: 'All rights reserved.'
+    },
+    trust: {
+      clients: 'Satisfied Clients',
+      sameDay: 'Same Day',
+      delivery: 'Delivery Available',
+      rating: 'Average Rating',
+      quality: 'Quality Guarantee'
+    },
+    faq: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Answers to the most common questions about our products and services',
+      questions: [
+        {
+          question: 'How long does a pallet of firewood last for a restaurant?',
+          answer: 'It depends on usage, but on average a 1.5 cubic yard pallet lasts 1-2 weeks for a restaurant with a pizza oven or grill in heavy use. For residential use, it can last several months.'
+        },
+        {
+          question: 'Do you offer same-day delivery?',
+          answer: 'Yes, we offer same-day delivery throughout the Miami metropolitan area if you place your order before 2:00 pm. Delivery hours: Monday to Friday, 8:00 am - 6:00 pm.'
+        },
+        {
+          question: 'What is the difference between Australian Pine and White Oak?',
+          answer: 'Australian Pine (Casuarina) is ideal for quick, consistent flame, perfect for pizza ovens. White Oak is denser, burns slower, and is perfect for smoking meats and high-temperature ovens.'
+        },
+        {
+          question: 'Is the firewood dry and ready to use?',
+          answer: 'Yes, all our firewood is sun-dried and ready for immediate use. We guarantee low moisture content for efficient combustion with minimal smoke.'
+        },
+        {
+          question: 'What is the minimum order?',
+          answer: 'For home delivery, the minimum order is 1 pallet (1.5 cubic yards). We also offer 5-piece bundles for smaller purchases, available for pickup or local delivery.'
+        },
+        {
+          question: 'Do you deliver throughout the Miami area?',
+          answer: 'Yes, we deliver to Miami, Doral, Kendall, Hialeah, Coral Gables, Homestead, Miami Lakes, Pembroke Pines, Fort Lauderdale, Aventura, and surrounding areas.'
+        }
+      ]
     }
   }
 }

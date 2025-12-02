@@ -25,8 +25,9 @@ export default function ProductsSection({ woods, lang }) {
                 <div className="product-image-container">
                   <MDBCardImage
                     src={wood.image}
-                    alt={wood.name}
+                    alt={`${i === 0 ? t.casuarinaName : t.oakName} - Premium ${i === 0 ? 'Australian Pine' : 'White Oak'} firewood for restaurants and pizza ovens in Miami`}
                     className="product-image"
+                    loading="lazy"
                   />
                   <div className="product-overlay">
                     <MDBIcon fas icon="fire" className="overlay-icon" />

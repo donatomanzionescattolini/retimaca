@@ -13,6 +13,8 @@ import DeliverySection from './components/DeliverySection'
 import GuidesSection from './components/GuidesSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
+import FAQSection from './components/FAQSection'
+import TrustSection from './components/TrustSection'
 import { useScrollSection } from './hooks/useScrollSection'
 import { useLanguage } from './hooks/useLanguage'
 import './index.css'
@@ -45,6 +47,7 @@ export default function App() {
       <ScrollIndicator currentSection={currentSection} />
       <NavigationBar currentSection={currentSection} lang={lang} toggleLanguage={toggleLanguage} />
       <HeroSection lang={lang} />
+      <TrustSection lang={lang} />
       <AboutSection lang={lang} />
       <ProductsSection woods={woods} lang={lang} />
       <PresentationSection lang={lang} />
@@ -58,6 +61,7 @@ export default function App() {
       {/*<ReviewsSection reviews={reviews} lang={lang} />*/}
       <DeliverySection lang={lang} />
       <GuidesSection lang={lang} />
+      <FAQSection lang={lang} />
       <ContactSection lang={lang} />
       <Footer lang={lang} />
     </div>

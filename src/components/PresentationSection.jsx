@@ -29,8 +29,9 @@ export default function PresentationSection({ lang }) {
               <div className="presentation-image-container">
                 <MDBCardImage
                   src="/pallet.jpg"
-                  alt="Pallet de leña seca"
+                  alt="Bulk firewood pallet delivery Miami - 1.5 cubic yards wholesale for restaurants and commercial use"
                   className="presentation-image"
+                  loading="lazy"
                 />
                 <div className="presentation-badge">
                   <span className="badge-text">{t.pallet.badge}</span>
@@ -57,8 +58,9 @@ export default function PresentationSection({ lang }) {
               <div className="presentation-image-container">
                 <MDBCardImage
                   src="/bundle.jpg"
-                  alt="Paquete de leña"
+                  alt="Firewood bundles Miami - 5 piece bundles for homes and small businesses"
                   className="presentation-image"
+                  loading="lazy"
                 />
                 <div className="presentation-badge">
                   <span className="badge-text">{t.bundle.badge}</span>
