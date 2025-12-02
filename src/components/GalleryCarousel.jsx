@@ -147,7 +147,7 @@ export default function GalleryCarousel({ gallery, currentSlide, prevSlide, next
                         className="text-center gallery-title"
                         style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
                       >
-                        {item.title}
+                        {lang === 'es' ? item.titleEs : item.titleEn}
                       </MDBCardText>
                     </MDBCardBody>
                   </MDBCard>

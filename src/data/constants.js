@@ -21,17 +21,17 @@ export const woods = [
 ]
 
 export const gallery = [
-  { src: "/pallet.jpg", title: "Pallet completo de leña seca", type: "image" },
-  { src: "/bundle.jpg", title: "Paquete de 5 piezas", type: "image" },
-  { src: "/casuarina.jpg", title: "Leña Casuarina lista para entrega", type: "image" },
-  { src: "/oak-blanco.jpg", title: "Leña Oak Blanco premium", type: "image" },
-  { src: "/video (1).mp4", title: "Servicio bajo la lluvia", type: "video" },
-  { src: "/video (2).mp4", title: "El secreto de la pizza bien hecha", type: "video" },
-  { src: "/video (3).mp4", title: "Nuestros trabajadores en acción", type: "video" },
-  { src: "/video (4).mp4", title: "Ejemplo de uso", type: "video" },
-  { src: "/video (5).mp4", title: "Tip para que el carbón dure más", type: "video" },
-  { src: "/video (6).mp4", title: "Tip para encender", type: "video" },
-  { src: "/video (7).mp4", title: "Ejemplo de uso", type: "video" },
+  { src: "/pallet.jpg", titleEs: "Pallet completo de leña seca", titleEn: "Complete pallet of dry firewood", type: "image" },
+  { src: "/bundle.jpg", titleEs: "Paquete de 5 piezas", titleEn: "5-piece bundle", type: "image" },
+  { src: "/casuarina.jpg", titleEs: "Leña Casuarina lista para entrega", titleEn: "Australian Pine firewood ready for delivery", type: "image" },
+  { src: "/oak-blanco.jpg", titleEs: "Leña Oak Blanco premium", titleEn: "Premium White Oak firewood", type: "image" },
+  { src: "/video (1).mp4", titleEs: "Servicio bajo la lluvia", titleEn: "Service in the rain", type: "video" },
+  { src: "/video (2).mp4", titleEs: "El secreto de la pizza bien hecha", titleEn: "The secret to perfect pizza", type: "video" },
+  { src: "/video (3).mp4", titleEs: "Nuestros trabajadores en acción", titleEn: "Our workers in action", type: "video" },
+  { src: "/video (4).mp4", titleEs: "Ejemplo de uso", titleEn: "Usage example", type: "video" },
+  { src: "/video (5).mp4", titleEs: "Tip para que el carbón dure más", titleEn: "Tip to make charcoal last longer", type: "video" },
+  { src: "/video (6).mp4", titleEs: "Tip para encender", titleEn: "Lighting tip", type: "video" },
+  { src: "/video (7).mp4", titleEs: "Ejemplo de uso", titleEn: "Usage example", type: "video" },
 ]
 
 export const reviews = [
