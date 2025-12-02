@@ -75,7 +75,7 @@ export default function GuidesSection({ lang }) {
                 </MDBCardText>
                 <MDBBtn
                   color="info"
-                  href="/guides/guia-express-miami-firewood.pdf"
+                  href="/guides/guia-express-miami-hardwood.pdf"
                   target="_blank"
                   className="fw-bold"
                   style={{ borderRadius: "25px" }}

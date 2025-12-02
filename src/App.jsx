@@ -47,7 +47,7 @@ export default function App() {
       <ScrollIndicator currentSection={currentSection} />
       <NavigationBar currentSection={currentSection} lang={lang} toggleLanguage={toggleLanguage} />
       <HeroSection lang={lang} />
-      <TrustSection lang={lang} />
+      {/*<TrustSection lang={lang} />*/}
       <AboutSection lang={lang} />
       <ProductsSection woods={woods} lang={lang} />
       <PresentationSection lang={lang} />
