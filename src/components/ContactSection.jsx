@@ -27,7 +27,7 @@ export default function ContactSection({ lang }) {
     try {
       const formDataWithRecipients = {
         ...formData,
-        _to: "info@retimaca.com,support@retimaca.com",
+        _to: "mauro4477@yahoo.com",
       }
 
       const response = await fetch("https://formspree.io/f/mwppvrrg", {
