@@ -6,6 +6,9 @@ import { translations } from '../data/translations'
 
 export default function ContactSection({ lang }) {
   const t = translations[lang].contact
+  const contactEndpoint =
+    import.meta.env.VITE_CONTACT_FORM_ENDPOINT?.trim() ||
+    `https://formsubmit.co/ajax/${CONTACT_INFO.email}`
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,31 +23,51 @@ export default function ContactSection({ lang }) {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
+  const openWhatsAppFallback = () => {
+    const whatsappMsg = encodeURIComponent(
+      `Nuevo mensaje de ${formData.name} (${formData.email}, ${formData.phone})\nDirección: ${formData.address}, ${formData.city} ${formData.zipCode}\nMensaje: ${formData.message}`
+    )
+    window.open(`${CONTACT_INFO.whatsapp}?text=${whatsappMsg}`, "_blank")
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus(t.sending)
 
     try {
-      const formDataWithRecipients = {
-        ...formData,
-        _to: "mauro4477@yahoo.com",
-      }
+      const isFormspreeEndpoint = contactEndpoint.includes("formspree.io/")
+      const payload = isFormspreeEndpoint
+        ? formData
+        : {
+            ...formData,
+            _subject: "Nuevo mensaje desde retimaca.com",
+            _captcha: "false",
+          }
 
-      const response = await fetch("https://formspree.io/f/mwppvrrg", {
+      const response = await fetch(contactEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formDataWithRecipients),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       })
 
-      if (response.ok) {
+      let responseBody = null
+      try {
+        responseBody = await response.json()
+      } catch {
+        responseBody = null
+      }
+
+      const responseMarkedFailure =
+        responseBody &&
+        Object.prototype.hasOwnProperty.call(responseBody, "success") &&
+        responseBody.success !== true &&
+        responseBody.success !== "true"
+
+      if (response.ok && !responseMarkedFailure) {
         setStatus(t.success)
-        const whatsappMsg = encodeURIComponent(
-          `Nuevo mensaje de ${formData.name} (${formData.email}): ${formData.message}`
-        )
-        window.open(
-          `${CONTACT_INFO.whatsapp}?text=${whatsappMsg}`,
-          "_blank"
-        )
         setFormData({
           name: "",
           email: "",
@@ -56,9 +79,11 @@ export default function ContactSection({ lang }) {
         })
       } else {
         setStatus(t.error)
+        openWhatsAppFallback()
       }
     } catch {
       setStatus(t.networkError)
+      openWhatsAppFallback()
     }
   }
 
