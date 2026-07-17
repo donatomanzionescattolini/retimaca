@@ -1,7 +1,7 @@
 export const CONTACT_INFO = {
   phone: '17868775187',
-  whatsapp: 'https://wa.me/17868775187',
-  email: 'info@retimaca.com',
+  whatsapp: 'https://wa.me/17868507247',
+  email: 'mauro4477@yahoo.com',
   address: '12750 NW 17th Street #222, Miami, FL 33182',
   hours: 'Lunes - Viernes: 8:00 am - 6:00 pm',
   instagram: 'https://www.instagram.com/hardwoodretimaca/'
