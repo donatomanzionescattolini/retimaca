@@ -1,29 +1,32 @@
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { MDBIcon } from 'mdb-react-ui-kit'
-import { woods, gallery, reviews, CONTACT_INFO } from './data/constants'
+import { woods, gallery, CONTACT_INFO } from './data/constants'
 import ScrollIndicator from './components/ScrollIndicator'
-import GalleryCarousel from './components/GalleryCarousel'
 import NavigationBar from './components/NavigationBar'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
 import ProductsSection from './components/ProductsSection'
-import PresentationSection from './components/PresentationSection'
-import ReviewsSection from './components/ReviewsSection'
-import DeliverySection from './components/DeliverySection'
-import GuidesSection from './components/GuidesSection'
-import ContactSection from './components/ContactSection'
-import Footer from './components/Footer'
-import FAQSection from './components/FAQSection'
-import TrustSection from './components/TrustSection'
+import GeoLandingSection from './components/GeoLandingSection'
 import { useScrollSection } from './hooks/useScrollSection'
 import { useLanguage } from './hooks/useLanguage'
+import { useSeoMeta } from './hooks/useSeoMeta'
 import './index.css'
 import 'mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs'
+
+const PresentationSection = lazy(() => import('./components/PresentationSection'))
+const GalleryCarousel = lazy(() => import('./components/GalleryCarousel'))
+const DeliverySection = lazy(() => import('./components/DeliverySection'))
+const ServiceAreasSection = lazy(() => import('./components/ServiceAreasSection'))
+const GuidesSection = lazy(() => import('./components/GuidesSection'))
+const FAQSection = lazy(() => import('./components/FAQSection'))
+const ContactSection = lazy(() => import('./components/ContactSection'))
+const Footer = lazy(() => import('./components/Footer'))
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const currentSection = useScrollSection()
-  const { lang, toggleLanguage } = useLanguage()
+  const { lang, route, toggleLanguage } = useLanguage()
+  useSeoMeta({ lang, route })
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length)
@@ -47,23 +50,25 @@ export default function App() {
       <ScrollIndicator currentSection={currentSection} />
       <NavigationBar currentSection={currentSection} lang={lang} toggleLanguage={toggleLanguage} />
       <HeroSection lang={lang} />
-      {/*<TrustSection lang={lang} />*/}
+      <GeoLandingSection lang={lang} landingPage={route.landingPage} />
       <AboutSection lang={lang} />
       <ProductsSection woods={woods} lang={lang} />
-      <PresentationSection lang={lang} />
-      <GalleryCarousel
-        gallery={gallery}
-        currentSlide={currentSlide}
-        prevSlide={prevSlide}
-        nextSlide={nextSlide}
-        lang={lang}
-      />
-      {/*<ReviewsSection reviews={reviews} lang={lang} />*/}
-      <DeliverySection lang={lang} />
-      <GuidesSection lang={lang} />
-      <FAQSection lang={lang} />
-      <ContactSection lang={lang} />
-      <Footer lang={lang} />
+      <Suspense fallback={<div className="section-loading" />}>
+        <PresentationSection lang={lang} />
+        <GalleryCarousel
+          gallery={gallery}
+          currentSlide={currentSlide}
+          prevSlide={prevSlide}
+          nextSlide={nextSlide}
+          lang={lang}
+        />
+        <DeliverySection lang={lang} />
+        <ServiceAreasSection lang={lang} />
+        <GuidesSection lang={lang} />
+        <FAQSection lang={lang} />
+        <ContactSection lang={lang} />
+        <Footer lang={lang} />
+      </Suspense>
     </div>
   )
 }

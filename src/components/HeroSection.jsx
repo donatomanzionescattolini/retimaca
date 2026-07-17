@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { MDBContainer, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 import { translations } from '../data/translations'
+import { CONTACT_INFO } from '../data/constants'
 
 export default function HeroSection({ lang }) {
   const t = translations[lang].hero
@@ -27,20 +28,28 @@ export default function HeroSection({ lang }) {
                 className="me-3 px-5 py-3 fw-bold"
                 style={{ borderRadius: "50px" }}
               >
-                <MDBIcon fas icon="phone" className="me-2" />
-                {t.contactBtn}
+                <MDBIcon fas icon="bolt" className="me-2" />
+                {t.quoteBtn}
               </MDBBtn>
               <MDBBtn
                 outline
                 color="light"
                 size="lg"
-                href="#productos"
+                href={`tel:+${CONTACT_INFO.phone}`}
                 className="px-5 py-3 fw-bold"
                 style={{ borderRadius: "50px" }}
               >
-                <MDBIcon fas icon="leaf" className="me-2" />
-                {t.productsBtn}
+                <MDBIcon fas icon="phone" className="me-2" />
+                {t.callBtn}
               </MDBBtn>
+            </div>
+            <div className="hero-proof-bar mt-4">
+              {t.proofPoints.map((point) => (
+                <div className="hero-proof-item" key={point}>
+                  <MDBIcon fas icon="check-circle" className="me-2 text-warning" />
+                  <span>{point}</span>
+                </div>
+              ))}
             </div>
           </div>
         </MDBContainer>

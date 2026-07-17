@@ -55,7 +55,7 @@ body {
 /* Hero Section */
 .hero-section {
   min-height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/pallet.jpg');
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), image-set(url('/casuarina.webp') type('image/webp'), url('/pallet.jpg') type('image/jpeg'));
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -82,6 +82,22 @@ body {
 
 .hero-buttons {
   animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero-proof-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero-proof-item {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 193, 7, 0.5);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-weight: 500;
 }
 
 /* Underline Decorations */
@@ -143,6 +159,23 @@ body {
   transition: opacity 0.3s ease;
 }
 
+.product-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-badge {
+  background: rgba(33, 37, 41, 0.9);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .product-card:hover .product-overlay {
   opacity: 1;
 }
@@ -164,6 +197,16 @@ body {
 .product-description {
   color: #6b4423;
   line-height: 1.7;
+}
+
+.product-use-case {
+  color: #4a2c0a;
+  font-weight: 600;
+}
+
+.product-comparison-table .table {
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 /* Presentation Cards */
@@ -534,6 +577,20 @@ body {
   animation: fadeIn 0.3s ease-in;
 }
 
+.service-area-card {
+  border-radius: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-area-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14) !important;
+}
+
+.section-loading {
+  height: 40px;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -642,6 +699,11 @@ body {
   .hero-buttons .btn {
     font-size: 0.9rem !important;
     padding: 0.75rem 2rem !important;
+  }
+
+  .hero-proof-item {
+    width: 100%;
+    text-align: center;
   }
   
   .delivery-feature {
@@ -833,4 +895,9 @@ body {
 .indicator-dot:hover {
   background: rgba(255, 193, 7, 0.8);
   transform: scale(1.1);
+}
+
+section:not(.hero-section) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }

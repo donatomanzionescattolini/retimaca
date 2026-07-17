@@ -4,6 +4,7 @@ export const translations = {
       about: 'Sobre Nosotros',
       products: 'Productos',
       delivery: 'Delivery',
+      serviceAreas: 'Áreas',
       guides: 'Guías',
       contact: 'Contacto'
     },
@@ -11,8 +12,15 @@ export const translations = {
       title: 'Leña Natural Premium',
       subtitle: 'Para Tu Negocio y Vivienda',
       description: 'Productos seleccionados, secados al sol y listos para uso profesional',
+      quoteBtn: 'Cotizar en 60 segundos',
+      callBtn: 'Llamar ahora',
       contactBtn: 'Contáctanos',
-      productsBtn: 'Ver Productos'
+      productsBtn: 'Ver Productos',
+      proofPoints: [
+        'Entrega el mismo día en Miami-Dade',
+        'Baja humedad para combustión eficiente',
+        'Atención para restaurantes y hogares'
+      ]
     },
     about: {
       title: 'Sobre Nosotros',
@@ -31,7 +39,19 @@ export const translations = {
       casuarinaName: 'Casuarina',
       oakName: 'Oak Blanco',
       casuarina: 'Ideal para restaurantes que buscan una flama duradera y aroma suave.',
-      oak: 'Leña densa, perfecta para ahumar carne y para hornos de alta temperatura.'
+      oak: 'Leña densa, perfecta para ahumar carne y para hornos de alta temperatura.',
+      specsTitle: 'Comparativa rápida para elegir la leña correcta',
+      columns: {
+        wood: 'Tipo',
+        flame: 'Flama',
+        duration: 'Duración',
+        smoke: 'Perfil de humo',
+        bestFor: 'Ideal para'
+      },
+      specs: {
+        casuarina: { flame: 'Rápida y estable', duration: 'Media', smoke: 'Ligero', bestFor: 'Pizza, parrilla, cocina diaria' },
+        oak: { flame: 'Intensa y constante', duration: 'Larga', smoke: 'Aromático', bestFor: 'Ahumado, horno de alta temperatura' }
+      }
     },
     presentation: {
       title: 'Formas de Presentación',
@@ -67,6 +87,12 @@ export const translations = {
       coverageText: 'Todo el área metropolitana de Miami',
       quality: 'Garantía de Calidad',
       qualityText: 'Nos encargamos de todos los palets y leña'
+    },
+    serviceAreas: {
+      title: 'Áreas de servicio por ciudad',
+      subtitle: 'Páginas locales con intención de búsqueda para ayudarte a ordenar más rápido',
+      cta: 'Abrir página local',
+      hubTitle: '¿Buscas entrega local de leña?'
     },
     guides: {
       title: 'Guías Rápidas',
@@ -146,6 +172,7 @@ export const translations = {
       about: 'About Us',
       products: 'Products',
       delivery: 'Delivery',
+      serviceAreas: 'Areas',
       guides: 'Guides',
       contact: 'Contact'
     },
@@ -153,8 +180,15 @@ export const translations = {
       title: 'Premium Natural Firewood',
       subtitle: 'For Your Business and Home',
       description: 'Selected products, sun-dried and ready for professional use',
+      quoteBtn: 'Get a quote in 60 seconds',
+      callBtn: 'Call now',
       contactBtn: 'Contact Us',
-      productsBtn: 'View Products'
+      productsBtn: 'View Products',
+      proofPoints: [
+        'Same-day delivery in Miami-Dade',
+        'Low-moisture wood for cleaner combustion',
+        'Built for restaurants and homes'
+      ]
     },
     about: {
       title: 'About Us',
@@ -173,7 +207,19 @@ export const translations = {
       casuarinaName: 'Australian Pine',
       oakName: 'White Oak',
       casuarina: 'Ideal for restaurants looking for a long-lasting flame and mild aroma.',
-      oak: 'Dense wood, perfect for smoking meat and high-temperature ovens.'
+      oak: 'Dense wood, perfect for smoking meat and high-temperature ovens.',
+      specsTitle: 'Quick comparison to choose the right wood',
+      columns: {
+        wood: 'Type',
+        flame: 'Flame',
+        duration: 'Burn duration',
+        smoke: 'Smoke profile',
+        bestFor: 'Best for'
+      },
+      specs: {
+        casuarina: { flame: 'Fast and stable', duration: 'Medium', smoke: 'Light', bestFor: 'Pizza, grill, daily cooking' },
+        oak: { flame: 'Intense and steady', duration: 'Long', smoke: 'Aromatic', bestFor: 'Smoking, high-heat ovens' }
+      }
     },
     presentation: {
       title: 'Presentation Options',
@@ -209,6 +255,12 @@ export const translations = {
       coverageText: 'All Miami metropolitan area',
       quality: 'Quality Guarantee',
       qualityText: 'We take care of all pallets and firewood'
+    },
+    serviceAreas: {
+      title: 'Service areas by city',
+      subtitle: 'Local intent pages to help you order faster',
+      cta: 'Open local page',
+      hubTitle: 'Need local firewood delivery?'
     },
     guides: {
       title: 'Quick Guides',

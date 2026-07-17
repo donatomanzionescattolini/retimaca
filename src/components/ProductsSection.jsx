@@ -28,9 +28,14 @@ export default function ProductsSection({ woods, lang }) {
                     alt={`${i === 0 ? t.casuarinaName : t.oakName} - Premium ${i === 0 ? 'Australian Pine' : 'White Oak'} firewood for restaurants and pizza ovens in Miami`}
                     className="product-image"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="product-overlay">
                     <MDBIcon fas icon="fire" className="overlay-icon" />
+                  </div>
+                  <div className="product-badges">
+                    <span className="product-badge">{wood.moisture}</span>
+                    <span className="product-badge">{wood.heat}</span>
                   </div>
                 </div>
                 <MDBCardBody className="p-4">
@@ -40,11 +45,49 @@ export default function ProductsSection({ woods, lang }) {
                   <MDBCardText className="product-description">
                     {i === 0 ? t.casuarina : t.oak}
                   </MDBCardText>
+                  <MDBCardText className="product-use-case mt-3">
+                    <MDBIcon fas icon="utensils" className="me-2 text-warning" />
+                    {wood.bestFor[lang]}
+                  </MDBCardText>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
           ))}
         </MDBRow>
+        <div className="product-comparison-table mt-5">
+          <h3 className="h4 fw-bold text-center mb-4" style={{ color: "#8B4513" }}>
+            {t.specsTitle}
+          </h3>
+          <div className="table-responsive">
+            <table className="table table-bordered align-middle bg-white">
+              <thead className="table-light">
+                <tr>
+                  <th>{t.columns.wood}</th>
+                  <th>{t.columns.flame}</th>
+                  <th>{t.columns.duration}</th>
+                  <th>{t.columns.smoke}</th>
+                  <th>{t.columns.bestFor}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{t.casuarinaName}</td>
+                  <td>{t.specs.casuarina.flame}</td>
+                  <td>{t.specs.casuarina.duration}</td>
+                  <td>{t.specs.casuarina.smoke}</td>
+                  <td>{t.specs.casuarina.bestFor}</td>
+                </tr>
+                <tr>
+                  <td>{t.oakName}</td>
+                  <td>{t.specs.oak.flame}</td>
+                  <td>{t.specs.oak.duration}</td>
+                  <td>{t.specs.oak.smoke}</td>
+                  <td>{t.specs.oak.bestFor}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </MDBContainer>
     </section>
   )

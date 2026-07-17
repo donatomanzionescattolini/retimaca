@@ -91,6 +91,14 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
+              <MDBNavbarLink
+                href="#areas-servicio"
+                className="nav-link-custom mx-2"
+              >
+                {t.serviceAreas}
+              </MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
               <MDBNavbarLink href="#guias" className="nav-link-custom mx-2">
                 {t.guides}
               </MDBNavbarLink>
