@@ -11,12 +11,24 @@ export const woods = [
   {
     name: "Casuarina",
     description: "Ideal para restaurantes que buscan una flama duradera y aroma suave.",
-    image: "/casuarina-arbol.jpg",
+    image: "/casuarina.webp",
+    moisture: "< 20%",
+    heat: "Medium-High",
+    bestFor: {
+      es: "Pizza y parrilla rápida",
+      en: "Pizza and fast grill service",
+    },
   },
   {
     name: "Oak Blanco",
     description: "Leña densa, perfecta para ahumar carne y para hornos de alta temperatura.",
     image: "/oak-blanco.jpg",
+    moisture: "< 18%",
+    heat: "High",
+    bestFor: {
+      es: "Ahumado y cocción lenta",
+      en: "Smoking and slow cook",
+    },
   },
 ]
 
@@ -57,8 +69,64 @@ export const SECTIONS = [
   "sobre-nosotros", 
   "productos",
   "galeria",
-  "opiniones",
   "delivery",
+  "areas-servicio",
   "guias",
+  "faq",
   "contacto"
+]
+
+export const CITY_LANDING_PAGES = [
+  {
+    id: "miami-delivery",
+    city: "Miami",
+    region: "Miami-Dade",
+    slugs: {
+      es: "lena-a-domicilio-miami",
+      en: "firewood-delivery-miami",
+    },
+    intents: {
+      es: "Leña a domicilio para restaurantes y hogares",
+      en: "Firewood delivery for restaurants and homes",
+    },
+  },
+  {
+    id: "doral-restaurants",
+    city: "Doral",
+    region: "Miami-Dade",
+    slugs: {
+      es: "proveedor-lena-restaurantes-doral",
+      en: "restaurant-firewood-supplier-doral",
+    },
+    intents: {
+      es: "Proveedor de leña para restaurantes",
+      en: "Restaurant firewood supplier",
+    },
+  },
+  {
+    id: "kendall-pizza",
+    city: "Kendall",
+    region: "Miami-Dade",
+    slugs: {
+      es: "lena-para-hornos-pizza-kendall",
+      en: "pizza-oven-firewood-kendall",
+    },
+    intents: {
+      es: "Leña premium para hornos de pizza",
+      en: "Premium firewood for pizza ovens",
+    },
+  },
+  {
+    id: "broward-wholesale",
+    city: "Broward",
+    region: "South Florida",
+    slugs: {
+      es: "lena-al-mayor-broward",
+      en: "bulk-firewood-broward",
+    },
+    intents: {
+      es: "Leña al mayor con entrega rápida",
+      en: "Bulk firewood with fast delivery",
+    },
+  },
 ]

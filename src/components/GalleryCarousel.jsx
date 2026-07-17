@@ -122,15 +122,18 @@ export default function GalleryCarousel({ gallery, currentSlide, prevSlide, next
                           className="gallery-image"
                           controls
                           playsInline
-                          preload="metadata"
+                          preload="none"
+                          poster="/casuarina.webp"
                           style={{ pointerEvents: "auto", zIndex: 10 }}
                         />
                       ) : (
                         <>
                           <MDBCardImage
                             src={item.src}
-                            alt={item.title}
+                            alt={lang === 'es' ? item.titleEs : item.titleEn}
                             className="gallery-image"
+                            loading="lazy"
+                            decoding="async"
                           />
                           <div className="gallery-overlay">
                             <MDBIcon

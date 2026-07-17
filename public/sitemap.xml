@@ -1,36 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://retimaca.com/</loc>
+    <loc>https://retimaca.com/es</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es" />
   </url>
   <url>
-    <loc>https://retimaca.com/#sobre-nosotros</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://retimaca.com/en</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es" />
   </url>
   <url>
-    <loc>https://retimaca.com/#productos</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://retimaca.com/es/lena-a-domicilio-miami</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/firewood-delivery-miami" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-a-domicilio-miami" />
   </url>
   <url>
-    <loc>https://retimaca.com/#delivery</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://retimaca.com/es/proveedor-lena-restaurantes-doral</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/restaurant-firewood-supplier-doral" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/proveedor-lena-restaurantes-doral" />
   </url>
   <url>
-    <loc>https://retimaca.com/#contacto</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://retimaca.com/es/lena-para-hornos-pizza-kendall</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/pizza-oven-firewood-kendall" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-para-hornos-pizza-kendall" />
+  </url>
+  <url>
+    <loc>https://retimaca.com/es/lena-al-mayor-broward</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/bulk-firewood-broward" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-al-mayor-broward" />
+  </url>
+  <url>
+    <loc>https://retimaca.com/en/firewood-delivery-miami</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/firewood-delivery-miami" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-a-domicilio-miami" />
   </url>
   <url>
-    <loc>https://retimaca.com/#faq</loc>
+    <loc>https://retimaca.com/en/restaurant-firewood-supplier-doral</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/restaurant-firewood-supplier-doral" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/proveedor-lena-restaurantes-doral" />
+  </url>
+  <url>
+    <loc>https://retimaca.com/en/pizza-oven-firewood-kendall</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/pizza-oven-firewood-kendall" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-para-hornos-pizza-kendall" />
+  </url>
+  <url>
+    <loc>https://retimaca.com/en/bulk-firewood-broward</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://retimaca.com/en/bulk-firewood-broward" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://retimaca.com/es/lena-al-mayor-broward" />
   </url>
 </urlset>
