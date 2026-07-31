@@ -17,6 +17,7 @@ import { translations } from '../data/translations'
 export default function NavigationBar({ currentSection, lang, toggleLanguage }) {
   const t = translations[lang].nav
   const [openNav, setOpenNav] = useState(false)
+  const closeNavigation = () => setOpenNav(false)
 
   return (
     <MDBNavbar
@@ -67,6 +68,7 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
             <MDBNavbarItem>
               <MDBNavbarLink
                 href="#sobre-nosotros"
+                onClick={closeNavigation}
                 className={`nav-link-custom mx-2 ${
                   currentSection === "sobre-nosotros" ? "active" : ""
                 }`}
@@ -77,6 +79,7 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
             <MDBNavbarItem>
               <MDBNavbarLink
                 href="#productos"
+                onClick={closeNavigation}
                 className="nav-link-custom mx-2"
               >
                 {t.products}
@@ -85,6 +88,7 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
             <MDBNavbarItem>
               <MDBNavbarLink
                 href="#delivery"
+                onClick={closeNavigation}
                 className="nav-link-custom mx-2"
               >
                 {t.delivery}
@@ -93,19 +97,31 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
             <MDBNavbarItem>
               <MDBNavbarLink
                 href="#areas-servicio"
+                onClick={closeNavigation}
                 className="nav-link-custom mx-2"
               >
                 {t.serviceAreas}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="#guias" className="nav-link-custom mx-2">
+              <MDBNavbarLink href="#galeria" onClick={closeNavigation} className="nav-link-custom mx-2">
+                {t.gallery}
+              </MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink href="#guias" onClick={closeNavigation} className="nav-link-custom mx-2">
                 {t.guides}
+              </MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink href="#faq" onClick={closeNavigation} className="nav-link-custom mx-2">
+                {t.faq}
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink
                 href="#contacto"
+                onClick={closeNavigation}
                 className="nav-link-custom mx-2"
               >
                 {t.contact}

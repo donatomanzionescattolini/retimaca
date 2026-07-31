@@ -41,6 +41,8 @@ function upsertLink(rel, href, hreflang) {
 
 export function useSeoMeta({ lang, route }) {
   useEffect(() => {
+    document.documentElement.lang = lang
+
     const landingPage = route.landingPage
     const localizedPath = buildPath(lang, route.slug)
     const canonical = `${SITE_URL}${localizedPath}`

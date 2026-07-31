@@ -31,9 +31,12 @@ export default function FAQSection({ lang }) {
               border: '2px solid #e9ecef'
             }}>
               <button
+                type="button"
                 onClick={() => toggleFAQ(index)}
                 className="w-100 text-start p-4 border-0 bg-transparent d-flex justify-content-between align-items-center"
                 style={{ cursor: 'pointer' }}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
               >
                 <span style={{ fontWeight: '600', color: '#8B4513', fontSize: '1.1rem' }}>
                   {item.question}
@@ -45,7 +48,7 @@ export default function FAQSection({ lang }) {
                 />
               </button>
               <MDBCollapse open={openIndex === index}>
-                <div className="p-4 pt-0" style={{ color: '#6b4423', lineHeight: '1.7' }}>
+                <div id={`faq-answer-${index}`} className="p-4 pt-0" style={{ color: '#6b4423', lineHeight: '1.7' }}>
                   {item.answer}
                 </div>
               </MDBCollapse>

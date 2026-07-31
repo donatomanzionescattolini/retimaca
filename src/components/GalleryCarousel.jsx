@@ -1,4 +1,3 @@
-/* eslint-disable */
 import PropTypes from 'prop-types'
 import {
     MDBContainer,
@@ -163,15 +162,15 @@ export default function GalleryCarousel({ gallery, currentSlide, prevSlide, next
             className="shadow-0 btn position-absolute start-0 top-50 translate-middle-y gallery-arrow-left z-5"
             onClick={prevSlide}
             onKeyDown={(e) => e.key === "Enter" && prevSlide()}
-            aria-label="Previous slide"
-          ></button>
+            aria-label={t.previous}
+          />
           <button
             type="button"
             className="shadow-0 btn position-absolute end-0 top-50 translate-middle-y gallery-arrow-right"
             onClick={nextSlide}
             onKeyDown={(e) => e.key === "Enter" && nextSlide()}
-            aria-label="Next slide"
-          ></button>
+            aria-label={t.next}
+          />
         </div>
       </MDBContainer>
     </section>

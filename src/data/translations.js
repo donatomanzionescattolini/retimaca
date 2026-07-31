@@ -5,7 +5,9 @@ export const translations = {
       products: 'Productos',
       delivery: 'Delivery',
       serviceAreas: 'Áreas',
+      gallery: 'Galería',
       guides: 'Guías',
+      faq: 'Preguntas',
       contact: 'Contacto'
     },
     hero: {
@@ -16,6 +18,7 @@ export const translations = {
       callBtn: 'Llamar ahora',
       contactBtn: 'Contáctanos',
       productsBtn: 'Ver Productos',
+      quoteMessage: 'Hola, quiero una cotización de leña.',
       proofPoints: [
         'Entrega el mismo día en Miami-Dade',
         'Baja humedad para combustión eficiente',
@@ -71,7 +74,9 @@ export const translations = {
     },
     gallery: {
       title: 'Galería de Fotos',
-      description: 'Descubre nuestra pasión por la calidad y excelencia a través de nuestra galería de imágenes'
+      description: 'Descubre nuestra pasión por la calidad y excelencia a través de nuestra galería de imágenes',
+      previous: 'Imagen anterior',
+      next: 'Siguiente imagen'
     },
     reviews: {
       title: 'Opiniones de Nuestros Clientes',
@@ -120,14 +125,34 @@ export const translations = {
       message: 'Mensaje o pedido',
       send: 'Enviar Mensaje',
       or: 'O contáctanos directamente',
+      chatCta: 'Abrir chat',
       sending: 'Enviando...',
       success: 'Mensaje enviado con éxito. ¡Gracias por contactarnos!',
       error: 'Hubo un error al enviar el mensaje. Intenta nuevamente.',
       networkError: 'No se pudo enviar el mensaje. Verifica tu conexión.'
     },
+    chat: {
+      kicker: 'Chat dentro del sitio',
+      title: 'Habla con Retimaca',
+      subtitle: 'Tu mensaje se enviará por email a Mauro sin salir de la web.',
+      open: 'Abrir chat',
+      close: 'Cerrar chat',
+      name: 'Tu nombre',
+      email: 'Tu correo electrónico',
+      phone: 'Tu teléfono',
+      message: 'Escribe tu mensaje',
+      note: 'Déjanos tu email o teléfono para poder responderte.',
+      replyRequired: 'Déjanos tu email o teléfono para responderte.',
+      send: 'Enviar chat',
+      sending: 'Enviando...',
+      success: 'Mensaje enviado. Mauro lo recibirá por email.',
+      error: 'No pudimos enviar el chat. Intenta nuevamente.'
+    },
     footer: {
       tagline: 'Leña natural premium para tu negocio',
-      rights: 'Todos los derechos reservados.'
+      rights: 'Todos los derechos reservados.',
+      openChat: 'Abrir chat',
+      instagram: 'Visitar Instagram de Retimaca'
     },
     trust: {
       clients: 'Clientes Satisfechos',
@@ -173,7 +198,9 @@ export const translations = {
       products: 'Products',
       delivery: 'Delivery',
       serviceAreas: 'Areas',
+      gallery: 'Gallery',
       guides: 'Guides',
+      faq: 'FAQ',
       contact: 'Contact'
     },
     hero: {
@@ -184,6 +211,7 @@ export const translations = {
       callBtn: 'Call now',
       contactBtn: 'Contact Us',
       productsBtn: 'View Products',
+      quoteMessage: 'Hi, I would like a firewood quote.',
       proofPoints: [
         'Same-day delivery in Miami-Dade',
         'Low-moisture wood for cleaner combustion',
@@ -239,7 +267,9 @@ export const translations = {
     },
     gallery: {
       title: 'Photo Gallery',
-      description: 'Discover our passion for quality and excellence through our image gallery'
+      description: 'Discover our passion for quality and excellence through our image gallery',
+      previous: 'Previous image',
+      next: 'Next image'
     },
     reviews: {
       title: 'Customer Reviews',
@@ -288,14 +318,34 @@ export const translations = {
       message: 'Message or order',
       send: 'Send Message',
       or: 'Or contact us directly',
+      chatCta: 'Open chat',
       sending: 'Sending...',
       success: 'Message sent successfully. Thank you for contacting us!',
       error: 'There was an error sending the message. Please try again.',
       networkError: 'Could not send the message. Check your connection.'
     },
+    chat: {
+      kicker: 'On-site chat',
+      title: 'Chat with Retimaca',
+      subtitle: 'Your message will be emailed to Mauro without leaving the site.',
+      open: 'Open chat',
+      close: 'Close chat',
+      name: 'Your name',
+      email: 'Your email',
+      phone: 'Your phone',
+      message: 'Write your message',
+      note: 'Leave your email or phone so we can reply.',
+      replyRequired: 'Leave your email or phone so we can reply.',
+      send: 'Send chat',
+      sending: 'Sending...',
+      success: 'Message sent. Mauro will receive it by email.',
+      error: 'We could not send the chat. Please try again.'
+    },
     footer: {
       tagline: 'Premium natural firewood for your business',
-      rights: 'All rights reserved.'
+      rights: 'All rights reserved.',
+      openChat: 'Open chat',
+      instagram: 'Visit Retimaca on Instagram'
     },
     trust: {
       clients: 'Satisfied Clients',

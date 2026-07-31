@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { MDBBtn, MDBContainer, MDBIcon } from 'mdb-react-ui-kit'
-import { CONTACT_INFO } from '../data/constants'
+import { openSiteChat } from '../utils/chat'
 
 export default function GeoLandingSection({ lang, landingPage }) {
   if (!landingPage) {
@@ -15,7 +15,7 @@ export default function GeoLandingSection({ lang, landingPage }) {
     ? `${landingPage.intents.es}. Entregamos Casuarina y Oak Blanco con disponibilidad para restaurantes, hornos de pizza y pedidos residenciales en ${landingPage.region}.`
     : `${landingPage.intents.en}. We deliver Australian Pine and White Oak for restaurants, pizza ovens, and residential orders across ${landingPage.region}.`
 
-  const whatsappText = encodeURIComponent(
+  const chatPrefill = (
     isSpanish
       ? `Hola, quiero una cotización de leña en ${landingPage.city}.`
       : `Hi, I need a firewood quote in ${landingPage.city}.`
@@ -29,14 +29,13 @@ export default function GeoLandingSection({ lang, landingPage }) {
         <MDBBtn
           color="warning"
           size="lg"
-          href={`${CONTACT_INFO.whatsapp}?text=${whatsappText}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          type="button"
+          onClick={() => openSiteChat(chatPrefill)}
           className="fw-bold px-4"
           style={{ borderRadius: '40px' }}
         >
-          <MDBIcon fab icon="whatsapp" className="me-2" />
-          {isSpanish ? 'Cotizar por WhatsApp' : 'Get quote on WhatsApp'}
+          <MDBIcon fas icon="comments" className="me-2" />
+          {isSpanish ? 'Cotizar por chat' : 'Get quote in chat'}
         </MDBBtn>
       </MDBContainer>
     </section>

@@ -67,7 +67,7 @@ export default function DeliverySection({ lang }) {
           <MDBCol lg="6" className="mb-4">
             <div className="map-container">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.5!2d-80.4167!3d25.7617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a1c5f5c5c5%3A0x1234567890abcdef!2s12750%20NW%2017th%20St%20%23222%2C%20Miami%2C%20FL%2033182!5e0!3m2!1sen!2sus!4v1234567890"
+                src="https://www.google.com/maps?q=12750+NW+17th+St+%23222,+Miami,+FL+33182&output=embed"
                 width="100%"
                 height="300"
                 style={{ border: 0, borderRadius: "10px" }}

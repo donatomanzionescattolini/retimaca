@@ -24,13 +24,6 @@ html {
   section {
     padding-top: var(--section-spacing-mobile) !important;
     padding-bottom: var(--section-spacing-mobile) !important;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-  }
-
-  section:target,
-  section.active {
-    opacity: 1;
   }
 
   .product-card,

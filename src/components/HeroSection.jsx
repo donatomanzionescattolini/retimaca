@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { MDBContainer, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 import { translations } from '../data/translations'
 import { CONTACT_INFO } from '../data/constants'
+import { openSiteChat } from '../utils/chat'
 
 export default function HeroSection({ lang }) {
   const t = translations[lang].hero
@@ -24,7 +25,8 @@ export default function HeroSection({ lang }) {
               <MDBBtn
                 color="warning"
                 size="lg"
-                href="#contacto"
+                type="button"
+                onClick={() => openSiteChat(t.quoteMessage)}
                 className="me-3 px-5 py-3 fw-bold"
                 style={{ borderRadius: "50px" }}
               >
