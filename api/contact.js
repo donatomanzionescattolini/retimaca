@@ -39,6 +39,16 @@ function parseBody(body) {
   return body
 }
 
+function readFirstEnv(env, keys) {
+  for (const key of keys) {
+    const value = env[key]
+    if (typeof value === 'string' && value.trim()) {
+      return value.trim()
+    }
+  }
+  return ''
+}
+
 function validatePayload(payload) {
   const source = payload.source === 'chat-widget' ? 'chat-widget' : 'contact-form'
   const normalized = {
@@ -168,14 +178,18 @@ export default async function handler(request, response) {
   }
 
   const env = globalThis.process?.env ?? {}
-  const resendApiKey = env.RESEND_API_KEY?.trim()
-  const fromEmail = env.CONTACT_FROM_EMAIL?.trim()
-  const toEmail = env.CONTACT_TO_EMAIL?.trim() || DEFAULT_RECIPIENT
+  const resendApiKey = readFirstEnv(env, ['RESEND_API_KEY'])
+  const fromEmail = readFirstEnv(env, ['CONTACT_FROM_EMAIL', 'RESEND_FROM_EMAIL'])
+  const toEmail = readFirstEnv(env, ['CONTACT_TO_EMAIL', 'RESEND_TO_EMAIL']) || DEFAULT_RECIPIENT
 
   if (!resendApiKey || !fromEmail) {
+    const missing = []
+    if (!resendApiKey) missing.push('RESEND_API_KEY')
+    if (!fromEmail) missing.push('CONTACT_FROM_EMAIL (or RESEND_FROM_EMAIL)')
+
     return response.status(503).json({
       success: false,
-      message: 'Email service is not configured.',
+      message: `Email service is not configured. Missing: ${missing.join(', ')}.`,
     })
   }
 
