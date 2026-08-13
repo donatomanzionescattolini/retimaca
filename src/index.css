@@ -440,6 +440,23 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
 }
 
+.contact-select {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 15px;
+  border: 2px solid #e9ecef;
+  padding: 12px 20px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  color: #212529;
+}
+
+.contact-select:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+  outline: none;
+}
+
 .contact-divider {
   position: relative;
   text-align: center;

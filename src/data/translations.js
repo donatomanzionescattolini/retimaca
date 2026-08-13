@@ -122,6 +122,31 @@ export const translations = {
       address: 'Dirección',
       city: 'Ciudad',
       zipCode: 'Código postal',
+      interestLabel: '¿Qué te interesa?',
+      interestPlaceholder: 'Selecciona una opción',
+      interestOptions: {
+        quote: 'Cotización / pedido',
+        business: 'Entrega para negocio',
+        residential: 'Entrega para vivienda',
+        custom: 'Servicio personalizado'
+      },
+      timelineLabel: '¿Cuándo necesitas la entrega?',
+      timelinePlaceholder: 'Selecciona una fecha estimada',
+      timelineOptions: {
+        immediate: 'Lo antes posible',
+        thisWeek: 'Esta semana',
+        nextMonth: 'Próximo mes',
+        exploring: 'Solo estoy explorando'
+      },
+      budgetLabel: 'Presupuesto aproximado',
+      budgetPlaceholder: 'Selecciona tu rango',
+      budgetOptions: {
+        under200: 'Menos de $200',
+        between200And500: '$200 - $500',
+        between500And1000: '$500 - $1,000',
+        over1000: 'Más de $1,000',
+        preferNotToSay: 'Prefiero no decirlo'
+      },
       message: 'Mensaje o pedido',
       send: 'Enviar Mensaje',
       or: 'O contáctanos directamente',
@@ -315,6 +340,31 @@ export const translations = {
       address: 'Address',
       city: 'City',
       zipCode: 'Zip code',
+      interestLabel: 'What are you looking for?',
+      interestPlaceholder: 'Select an option',
+      interestOptions: {
+        quote: 'Quote / order',
+        business: 'Business delivery',
+        residential: 'Home delivery',
+        custom: 'Custom service'
+      },
+      timelineLabel: 'When do you need it?',
+      timelinePlaceholder: 'Select an estimated time',
+      timelineOptions: {
+        immediate: 'As soon as possible',
+        thisWeek: 'This week',
+        nextMonth: 'Within the next month',
+        exploring: 'Just exploring'
+      },
+      budgetLabel: 'Approximate budget',
+      budgetPlaceholder: 'Select your range',
+      budgetOptions: {
+        under200: 'Under $200',
+        between200And500: '$200 - $500',
+        between500And1000: '$500 - $1,000',
+        over1000: 'Over $1,000',
+        preferNotToSay: 'Prefer not to say'
+      },
       message: 'Message or order',
       send: 'Send Message',
       or: 'Or contact us directly',

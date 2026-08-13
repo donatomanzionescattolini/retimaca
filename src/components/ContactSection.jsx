@@ -15,6 +15,9 @@ export default function ContactSection({ lang }) {
     address: '',
     city: '',
     zipCode: '',
+    interest: '',
+    timeline: '',
+    budget: '',
     message: '',
     company: '',
   })
@@ -45,6 +48,8 @@ export default function ContactSection({ lang }) {
         source: 'contact-form',
         lang,
         pageUrl: window.location.href,
+        subject: `Inquiry from ${formData.name}`,
+        fromName: formData.name,
       })
 
       setStatus(t.success)
@@ -55,6 +60,9 @@ export default function ContactSection({ lang }) {
         address: '',
         city: '',
         zipCode: '',
+        interest: '',
+        timeline: '',
+        budget: '',
         message: '',
         company: '',
       })
@@ -163,6 +171,56 @@ export default function ContactSection({ lang }) {
                         required
                         className="mb-4 contact-input"
                       />
+                    </MDBCol>
+                  </MDBRow>
+                  <MDBRow>
+                    <MDBCol md="4">
+                      <div className="mb-4">
+                        <label className="form-label mb-2 text-muted">{t.interestLabel}</label>
+                        <select
+                          name="interest"
+                          value={formData.interest}
+                          onChange={handleChange}
+                          className="form-select contact-select"
+                        >
+                          <option value="" disabled>{t.interestPlaceholder}</option>
+                          {Object.entries(t.interestOptions).map(([value, label]) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </MDBCol>
+                    <MDBCol md="4">
+                      <div className="mb-4">
+                        <label className="form-label mb-2 text-muted">{t.timelineLabel}</label>
+                        <select
+                          name="timeline"
+                          value={formData.timeline}
+                          onChange={handleChange}
+                          className="form-select contact-select"
+                        >
+                          <option value="" disabled>{t.timelinePlaceholder}</option>
+                          {Object.entries(t.timelineOptions).map(([value, label]) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </MDBCol>
+                    <MDBCol md="4">
+                      <div className="mb-4">
+                        <label className="form-label mb-2 text-muted">{t.budgetLabel}</label>
+                        <select
+                          name="budget"
+                          value={formData.budget}
+                          onChange={handleChange}
+                          className="form-select contact-select"
+                        >
+                          <option value="" disabled>{t.budgetPlaceholder}</option>
+                          {Object.entries(t.budgetOptions).map(([value, label]) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                      </div>
                     </MDBCol>
                   </MDBRow>
                   <MDBTextArea

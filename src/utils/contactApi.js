@@ -19,6 +19,12 @@ function getAccessKey() {
   return accessKey
 }
 
+function cleanFields(fields) {
+  return Object.fromEntries(
+    Object.entries(fields).filter(([, value]) => value !== undefined && value !== null && value !== ''),
+  )
+}
+
 function validatePayload(payload) {
   const source = payload.source === 'chat-widget' ? 'chat-widget' : 'contact-form'
   const normalized = {
@@ -33,6 +39,9 @@ function validatePayload(payload) {
     message: sanitizeField(payload.message),
     pageUrl: sanitizeField(payload.pageUrl),
     company: sanitizeField(payload.company),
+    interest: sanitizeField(payload.interest),
+    timeline: sanitizeField(payload.timeline),
+    budget: sanitizeField(payload.budget),
   }
 
   if (normalized.company) {
@@ -81,19 +90,24 @@ export async function submitContactMessage(payload) {
     },
     body: JSON.stringify({
       access_key: accessKey,
-      subject: buildSubject(normalized),
-      from_name: normalized.name,
+      subject: payload.subject || buildSubject(normalized),
+      from_name: payload.fromName || normalized.name,
       ...(normalized.email ? { replyto: normalized.email } : {}),
       source: normalized.source,
       language: normalized.lang,
-      name: normalized.name,
-      email: normalized.email,
-      phone: normalized.phone,
-      address: normalized.address,
-      city: normalized.city,
-      zipCode: normalized.zipCode,
-      pageUrl: normalized.pageUrl,
-      message: normalized.message,
+      ...cleanFields({
+        name: normalized.name,
+        email: normalized.email,
+        phone: normalized.phone,
+        address: normalized.address,
+        city: normalized.city,
+        zipCode: normalized.zipCode,
+        pageUrl: normalized.pageUrl,
+        message: normalized.message,
+        interest: normalized.interest,
+        timeline: normalized.timeline,
+        budget: normalized.budget,
+      }),
     }),
   })
 
