@@ -16,7 +16,6 @@ import 'mdb-react-ui-kit/dist/mdb-react-ui-kit.cjs'
 const PresentationSection = lazy(() => import('./components/PresentationSection'))
 const GalleryCarousel = lazy(() => import('./components/GalleryCarousel'))
 const DeliverySection = lazy(() => import('./components/DeliverySection'))
-const ServiceAreasSection = lazy(() => import('./components/ServiceAreasSection'))
 const GuidesSection = lazy(() => import('./components/GuidesSection'))
 const FAQSection = lazy(() => import('./components/FAQSection'))
 const ContactSection = lazy(() => import('./components/ContactSection'))
@@ -63,7 +62,6 @@ export default function App() {
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <DeliverySection lang={lang} />
-        <ServiceAreasSection lang={lang} />
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <GuidesSection lang={lang} />

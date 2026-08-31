@@ -95,15 +95,6 @@ export default function NavigationBar({ currentSection, lang, toggleLanguage }) 
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink
-                href="#areas-servicio"
-                onClick={closeNavigation}
-                className="nav-link-custom mx-2"
-              >
-                {t.serviceAreas}
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
               <MDBNavbarLink href="#galeria" onClick={closeNavigation} className="nav-link-custom mx-2">
                 {t.gallery}
               </MDBNavbarLink>
