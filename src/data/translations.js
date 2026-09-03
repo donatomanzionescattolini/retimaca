@@ -4,7 +4,6 @@ export const translations = {
       about: 'Sobre Nosotros',
       products: 'Productos',
       delivery: 'Delivery',
-      serviceAreas: 'Áreas',
       gallery: 'Galería',
       guides: 'Guías',
       faq: 'Preguntas',
@@ -92,12 +91,6 @@ export const translations = {
       coverageText: 'Todo el área metropolitana de Miami',
       quality: 'Garantía de Calidad',
       qualityText: 'Nos encargamos de todos los palets y leña'
-    },
-    serviceAreas: {
-      title: 'Áreas de servicio por ciudad',
-      subtitle: 'Páginas locales con intención de búsqueda para ayudarte a ordenar más rápido',
-      cta: 'Abrir página local',
-      hubTitle: '¿Buscas entrega local de leña?'
     },
     guides: {
       title: 'Guías Rápidas',
@@ -222,7 +215,6 @@ export const translations = {
       about: 'About Us',
       products: 'Products',
       delivery: 'Delivery',
-      serviceAreas: 'Areas',
       gallery: 'Gallery',
       guides: 'Guides',
       faq: 'FAQ',
@@ -310,12 +302,6 @@ export const translations = {
       coverageText: 'All Miami metropolitan area',
       quality: 'Quality Guarantee',
       qualityText: 'We take care of all pallets and firewood'
-    },
-    serviceAreas: {
-      title: 'Service areas by city',
-      subtitle: 'Local intent pages to help you order faster',
-      cta: 'Open local page',
-      hubTitle: 'Need local firewood delivery?'
     },
     guides: {
       title: 'Quick Guides',
