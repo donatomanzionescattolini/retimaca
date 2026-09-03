@@ -2,6 +2,13 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Contact forms
+
+Forms use [Web3Forms](https://web3forms.com/) to deliver messages. Copy `.env.example` to
+`.env.local`, replace `VITE_WEB3FORMS_KEY` with the access key from the Web3Forms
+dashboard, and restart the Vite server. The same variable must be configured in the
+production deployment environment.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
