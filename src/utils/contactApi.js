@@ -1,6 +1,6 @@
 const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const EMAIL_RECIPIENTS = ['info@retimaca.com', 'mauro4477@yahoo.com', 'mauro4477@gmail.com']
+const EMAIL_RECIPIENT = 'info@retimaca.com'
 
 function sanitizeField(value) {
   return typeof value === 'string' ? value.trim() : ''
@@ -93,8 +93,7 @@ export async function submitContactMessage(payload) {
       access_key: accessKey,
       subject: payload.subject || buildSubject(normalized),
       from_name: payload.fromName || normalized.name,
-      to: EMAIL_RECIPIENTS[0],
-      cc: EMAIL_RECIPIENTS.filter((email) => email !== 'info@retimaca.com').join(', '),
+      to: EMAIL_RECIPIENT,
       ...(normalized.email ? { replyto: normalized.email } : {}),
       source: normalized.source,
       language: normalized.lang,
