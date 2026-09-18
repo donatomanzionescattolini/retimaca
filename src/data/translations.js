@@ -152,7 +152,7 @@ export const translations = {
     chat: {
       kicker: 'Chat dentro del sitio',
       title: 'Habla con Retimaca',
-      subtitle: 'Tu mensaje se enviará por email a Mauro sin salir de la web.',
+      subtitle: 'Tu mensaje se enviará por email a Retimaca sin salir de la web.',
       open: 'Abrir chat',
       close: 'Cerrar chat',
       name: 'Tu nombre',
@@ -163,7 +163,7 @@ export const translations = {
       replyRequired: 'Déjanos tu email o teléfono para responderte.',
       send: 'Enviar chat',
       sending: 'Enviando...',
-      success: 'Mensaje enviado. Mauro lo recibirá por email.',
+      success: 'Mensaje enviado. Retimaca lo recibirá por email.',
       error: 'No pudimos enviar el chat. Intenta nuevamente.'
     },
     footer: {
@@ -363,7 +363,7 @@ export const translations = {
     chat: {
       kicker: 'On-site chat',
       title: 'Chat with Retimaca',
-      subtitle: 'Your message will be emailed to Mauro without leaving the site.',
+      subtitle: 'Your message will be emailed to Retimaca without leaving the site.',
       open: 'Open chat',
       close: 'Close chat',
       name: 'Your name',
@@ -374,7 +374,7 @@ export const translations = {
       replyRequired: 'Leave your email or phone so we can reply.',
       send: 'Send chat',
       sending: 'Sending...',
-      success: 'Message sent. Mauro will receive it by email.',
+      success: 'Message sent. Retimaca will receive it by email.',
       error: 'We could not send the chat. Please try again.'
     },
     footer: {

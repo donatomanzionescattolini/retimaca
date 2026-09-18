@@ -1,6 +1,7 @@
-const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const EMAIL_RECIPIENT = 'info@retimaca.com'
+const EMAIL_RECIPIENT = (import.meta.env.VITE_CONTACT_EMAIL ?? 'info@retimaca.com').trim()
+const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${EMAIL_RECIPIENT}`
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 
 function sanitizeField(value) {
   return typeof value === 'string' ? value.trim() : ''
@@ -8,16 +9,6 @@ function sanitizeField(value) {
 
 function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0
-}
-
-function getAccessKey() {
-  const accessKey = import.meta.env.VITE_WEB3FORMS_KEY?.trim()
-
-  if (!accessKey) {
-    throw new Error('VITE_WEB3FORMS_KEY is not configured.')
-  }
-
-  return accessKey
 }
 
 function cleanFields(fields) {
@@ -80,9 +71,58 @@ function buildSubject(payload) {
   return payload.lang === 'en' ? 'New contact form - retimaca.com' : 'Nuevo formulario - retimaca.com'
 }
 
-export async function submitContactMessage(payload) {
-  const accessKey = getAccessKey()
-  const normalized = validatePayload(payload)
+function buildFormSubmitPayload(normalized, payload) {
+  const fields = cleanFields({
+    name: normalized.name,
+    email: normalized.email,
+    phone: normalized.phone,
+    address: normalized.address,
+    city: normalized.city,
+    zipCode: normalized.zipCode,
+    interest: normalized.interest,
+    timeline: normalized.timeline,
+    budget: normalized.budget,
+    pageUrl: normalized.pageUrl,
+    source: normalized.source,
+    language: normalized.lang,
+    message: normalized.message,
+  })
+
+  return {
+    ...fields,
+    _subject: payload.subject || buildSubject(normalized),
+    _captcha: 'false',
+    _template: 'table',
+    _replyto: normalized.email || '',
+  }
+}
+
+async function tryFormSubmit(normalized, payload) {
+  const response = await fetch(FORMSUBMIT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(buildFormSubmitPayload(normalized, payload)),
+  })
+
+  const responseBody = await response.json().catch(() => ({ success: true }))
+
+  if (!response.ok || responseBody?.success === false) {
+    throw new Error(responseBody?.message || 'Request failed.')
+  }
+
+  return responseBody
+}
+
+async function tryWeb3Forms(normalized, payload) {
+  const accessKey = import.meta.env.VITE_WEB3FORMS_KEY?.trim()
+
+  if (!accessKey) {
+    throw new Error('VITE_WEB3FORMS_KEY is not configured.')
+  }
+
   const response = await fetch(WEB3FORMS_URL, {
     method: 'POST',
     headers: {
@@ -120,4 +160,20 @@ export async function submitContactMessage(payload) {
   }
 
   return responseBody
+}
+
+export async function submitContactMessage(payload) {
+  const normalized = validatePayload(payload)
+
+  try {
+    return await tryFormSubmit(normalized, payload)
+  } catch (formSubmitError) {
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY?.trim()
+
+    if (accessKey) {
+      return tryWeb3Forms(normalized, payload)
+    }
+
+    throw formSubmitError
+  }
 }
